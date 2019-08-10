@@ -48,12 +48,16 @@ public class GameServiceImpl implements GameService {
         Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.Direction.ASC, sortedValue);
         if (!team.equals("AllTeams") && period.equals(Period.WHOLESEASON.toString())) {
             return gameDao.findGamesByGameTeam(team, pageable);
+            //return whole season game info for one team with pages
         } else if (!team.equals("AllTeams") && !period.equals(Period.WHOLESEASON.toString())) {
             return gameDao.findGamesByGameDateBetweenAndGameTeam(startDate, endDate, team, pageable);
+            //return this week/next week game info for one team with pages
         } else if (team.equals("AllTeams") && !period.equals(Period.WHOLESEASON.toString())) {
             return gameDao.findGamesByGameDateBetween(startDate, endDate, pageable);
+            //return this week/next week game info for all teams with pages
         }
         return gameDao.findAll(pageable);
+        //return whole season game info for all teams with pages
     }
 
 

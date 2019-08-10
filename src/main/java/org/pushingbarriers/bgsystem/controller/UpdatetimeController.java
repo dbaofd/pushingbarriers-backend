@@ -13,6 +13,7 @@ public class UpdatetimeController {
     private UpdatetimeService updatetimeService;
 
     @GetMapping(value = "/get-update-time")
+    @AuthToken
     public GameUpdateTime getUpdateTime(){
         return updatetimeService.getUpdateTime(1);
     }

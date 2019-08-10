@@ -39,6 +39,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
         RedisHelper redisHelper=new RedisHelper();
+        System.out.println(request.getRequestURI());
 
         // if the method has @AuthToken annotation, we need to check it token.
         if (method.getAnnotation(AuthToken.class) != null || handlerMethod.getBeanType().getAnnotation(AuthToken.class) != null) {

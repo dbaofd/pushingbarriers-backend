@@ -24,6 +24,7 @@ public class GameController {
                                       @PathVariable(value = "team") String team,
                                       @PathVariable(value = "period") String period,
                                       @PathVariable(value = "sortedValue") String sortedValue) {
+        System.out.println(team);
         return gameService.getGamesByPage(team, period, size, sortedValue, page);
     }
 

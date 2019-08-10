@@ -65,6 +65,7 @@ public class AdminController {
             redisHelper.closeJedis(jedis);
         }catch(Exception e){
             result.put("msg","fail_to_connect_redis");
+            return result;
         }
         if(admin!=null){
             if(!admin.equals(adminName)){
