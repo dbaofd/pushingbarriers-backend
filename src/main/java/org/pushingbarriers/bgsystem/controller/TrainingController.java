@@ -33,9 +33,9 @@ public class TrainingController {
 
     @PostMapping(value="/updateTrainingDetail")
     @AuthToken
-    public JSONObject updateTrainingDetail(String driver, String time, String status, Integer id){
+    public JSONObject updateTrainingDetail(String driver, String time, String status, String note, Integer id){
         JSONObject result = new JSONObject();
-        trainingService.updateTrainingDetail(driver,time, status, id);
+        trainingService.updateTrainingDetail(driver,time, status, note, id);
         result.put("msg","update training detail successfully");
         return result;
     }

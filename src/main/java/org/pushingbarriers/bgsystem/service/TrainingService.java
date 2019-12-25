@@ -9,5 +9,5 @@ public interface TrainingService {
 
     public void updateConfirmationStatus(Integer id, String status);
 
-    public void updateTrainingDetail(String driver, String time, String status, Integer id);
+    public void updateTrainingDetail(String driver, String time, String status, String note, Integer id);
 }

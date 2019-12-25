@@ -1,38 +1,40 @@
-package org.pushingbarriers.bgsystem.model;
+package org.pushingbarriers.bgsystem.dto;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name="driver")
-public class Driver {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+/**
+ * Created by baodong on 2019/12/11.
+ */
+//Driver dto, no password included
+public class BasicDriver {
     private Integer driverId;
 
-    @Column(length = 100, nullable = false, name = "driverUserName")
     private String driverUserName;
 
-    @Column(length = 100, nullable = false, name = "driverName")
     private String driverName;
 
-    @Column(length = 15, nullable = false, name = "driverGender")
     private String driverGender;
 
-    @Column(length = 100, nullable = false, name = "driverPassword")
-    private String driverPassword;
-
-    @Column(length = 15, nullable = false, name = "driverPhoneNum")
     private String driverPhoneNum;
 
-    @Column(length = 20, nullable = false, name = "driverPlateNum")
     private String driverPlateNum;
 
-    @Column(nullable = false, name = "driverBirthday")
     private Date driverBirthday;
 
-    @Column(length = 170, nullable = false, name = "driverAddress")
     private String driverAddress;
+
+    public BasicDriver(Integer driverId,String driverUserName,String driverName,String driverGender,
+                       String driverPhoneNum,String driverPlateNum,Date driverBirthday,String driverAddress){
+        this.driverId=driverId;
+        this.driverUserName=driverUserName;
+        this.driverName=driverName;
+        this.driverGender=driverGender;
+        this.driverPhoneNum=driverPhoneNum;
+        this.driverPlateNum=driverPlateNum;
+        this.driverBirthday=driverBirthday;
+        this.driverAddress=driverAddress;
+
+    }
 
     public Integer getDriverId() {
         return driverId;
@@ -64,14 +66,6 @@ public class Driver {
 
     public void setDriverGender(String driverGender) {
         this.driverGender = driverGender;
-    }
-
-    public String getDriverPassword() {
-        return driverPassword;
-    }
-
-    public void setDriverPassword(String driverPassword) {
-        this.driverPassword = driverPassword;
     }
 
     public String getDriverPhoneNum() {

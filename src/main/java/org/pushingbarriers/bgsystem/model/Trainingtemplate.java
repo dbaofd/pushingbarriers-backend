@@ -2,9 +2,12 @@ package org.pushingbarriers.bgsystem.model;
 
 import javax.persistence.*;
 
+/**
+ * Created by baodong on 2019/12/2.
+ */
 @Entity
-@Table(name="training")
-public class Training {
+@Table(name="trainingtemplate")
+public class Trainingtemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer trainingId;

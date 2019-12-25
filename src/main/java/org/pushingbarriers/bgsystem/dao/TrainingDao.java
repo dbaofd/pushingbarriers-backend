@@ -16,8 +16,8 @@ public interface TrainingDao extends JpaRepository<Training,Integer> {
     //Whenever you are trying to modify a record in db, you have to mark it
     //@Transactional as well as @Modifying, which instruct Spring that it can modify existing records.
 
-    @Query("update Training set trainingDriver=?1,trainingTime=?2,trainingConfirmation=?3 where trainingId=?4")
+    @Query("update Training set trainingDriver=?1,trainingTime=?2,trainingConfirmation=?3, trainingNote=?4 where trainingId=?5")
     @Modifying
     @Transactional
-    public void updateTrainingDetail(String driver, String time, String status, Integer id);
+    public void updateTrainingDetail(String driver, String time, String status, String note, Integer id);
 }
