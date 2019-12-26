@@ -1,10 +1,13 @@
 package org.pushingbarriers.bgsystem.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import org.pushingbarriers.bgsystem.annotation.AuthToken;
 import org.pushingbarriers.bgsystem.dto.BasicDriver;
 import org.pushingbarriers.bgsystem.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,5 +24,20 @@ public class DriverController {
     @AuthToken
     public List<BasicDriver> findAllDrivers(){
         return driverService.findAllDrivers();
+    }
+
+    @GetMapping(value="/findDriversByName/{driverName}")
+    @AuthToken
+    public List<BasicDriver> findDriversByName(@PathVariable(value = "driverName")String driverName){
+        return driverService.findDriversByName(driverName);
+    }
+
+    @PostMapping(value="/resetDriverPassword")
+    @AuthToken
+    public JSONObject resetDriverPassword(String password, Integer id){
+        driverService.resetDriverPassword(password,id);
+        JSONObject result =new JSONObject();
+        result.put("msg","reset driver password successfully");
+        return result;
     }
 }

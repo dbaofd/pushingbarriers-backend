@@ -9,4 +9,8 @@ import java.util.List;
  */
 public interface DriverService {
     public List<BasicDriver> findAllDrivers();
+
+    public List<BasicDriver> findDriversByName(String driverName);
+
+    public void resetDriverPassword(String password, Integer id);
 }

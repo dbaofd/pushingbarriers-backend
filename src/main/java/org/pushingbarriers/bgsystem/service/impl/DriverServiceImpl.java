@@ -20,4 +20,14 @@ public class DriverServiceImpl implements DriverService {
     public List<BasicDriver> findAllDrivers(){
         return driverDao.findAllDrivers();
     }
+
+    @Override
+    public List<BasicDriver> findDriversByName(String driverName){
+        return driverDao.findDriversByName(driverName);
+    }
+
+    @Override
+    public void resetDriverPassword(String password, Integer id){
+        driverDao.resetDriverPassword(password,id);
+    }
 }

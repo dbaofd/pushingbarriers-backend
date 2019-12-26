@@ -34,6 +34,9 @@ public class Driver {
     @Column(length = 170, nullable = false, name = "driverAddress")
     private String driverAddress;
 
+    @Column(nullable = false, name = "driverAvailability")
+    private Integer driverAvailability;
+
     public Integer getDriverId() {
         return driverId;
     }
@@ -104,5 +107,13 @@ public class Driver {
 
     public void setDriverAddress(String driverAddress) {
         this.driverAddress = driverAddress;
+    }
+
+    public Integer getDriverAvailability() {
+        return driverAvailability;
+    }
+
+    public void setDriverAvailability(Integer driverAvailability) {
+        this.driverAvailability = driverAvailability;
     }
 }

@@ -23,8 +23,11 @@ public class BasicDriver {
 
     private String driverAddress;
 
-    public BasicDriver(Integer driverId,String driverUserName,String driverName,String driverGender,
-                       String driverPhoneNum,String driverPlateNum,Date driverBirthday,String driverAddress){
+    private Integer driverAvailability;
+
+    public BasicDriver(Integer driverId,String driverUserName,String driverName,
+                       String driverGender,String driverPhoneNum,String driverPlateNum,
+                       Date driverBirthday,String driverAddress, Integer driverAvailability){
         this.driverId=driverId;
         this.driverUserName=driverUserName;
         this.driverName=driverName;
@@ -33,6 +36,7 @@ public class BasicDriver {
         this.driverPlateNum=driverPlateNum;
         this.driverBirthday=driverBirthday;
         this.driverAddress=driverAddress;
+        this.driverAvailability=driverAvailability;
 
     }
 
@@ -98,5 +102,13 @@ public class BasicDriver {
 
     public void setDriverAddress(String driverAddress) {
         this.driverAddress = driverAddress;
+    }
+
+    public Integer getDriverAvailability() {
+        return driverAvailability;
+    }
+
+    public void setDriverAvailability(Integer driverAvailability) {
+        this.driverAvailability = driverAvailability;
     }
 }
