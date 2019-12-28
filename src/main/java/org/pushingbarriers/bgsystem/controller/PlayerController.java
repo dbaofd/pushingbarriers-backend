@@ -30,8 +30,8 @@ public class PlayerController {
     @PostMapping(value="/updatePlayerInfo")
     @AuthToken
     public JSONObject updatePlayerInfo(String name, String gender, String phoneNum, Date birthday,
-                                       String parentName, String parentPhoneNum, String address, Integer status, Integer id){
-        playerService.updatePlayerInfo(name,gender,phoneNum,birthday,parentName,parentPhoneNum,address,status, id);
+                                       String parentName, String parentPhoneNum, String address, Integer status, Integer id, Integer[] teams){
+        playerService.updatePlayerInfo(name,gender,phoneNum,birthday,parentName,parentPhoneNum,address,status, id,teams);
         JSONObject result = new JSONObject();
         result.put("msg","update player info successfully");
         return result;
@@ -46,8 +46,9 @@ public class PlayerController {
     @PostMapping(value="/insertNewPlayer")
     @AuthToken
     public JSONObject insertNewPlayer(String playerName, String playerGender, String playerPhoneNum, Date playerBirthDay,
-                                      String playerParentName, String playerParentPhoneNum, String playerAddress){
-        playerService.insertNewPlayer(playerName,playerGender,playerPhoneNum,playerBirthDay,playerParentName,playerParentPhoneNum,playerAddress);
+                                      String playerParentName, String playerParentPhoneNum, String playerAddress, Integer[] teamList){
+        //playerService.insertNewPlayer(playerName,playerGender,playerPhoneNum,playerBirthDay,playerParentName,playerParentPhoneNum,playerAddress);
+        playerService.saveNewPlayer(playerName,playerGender,playerPhoneNum,playerBirthDay,playerParentName,playerParentPhoneNum,playerAddress,teamList);
         JSONObject result = new JSONObject();
         result.put("msg","insert new player successfully");
         return result;

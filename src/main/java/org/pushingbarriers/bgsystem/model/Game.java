@@ -14,6 +14,9 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer gameId;
 
+    @Column(nullable = false, name="gameTeamId")
+    private Integer gameTeamId;
+
     @Column(length = 150, nullable = false, name = "gameTeam")
     private String gameTeam;
 
@@ -41,6 +44,14 @@ public class Game {
 
     public void setGameId(Integer gameId) {
         this.gameId = gameId;
+    }
+
+    public Integer getGameTeamId() {
+        return gameTeamId;
+    }
+
+    public void setGameTeamId(Integer gameTeamId) {
+        this.gameTeamId = gameTeamId;
     }
 
     public String getGameTeam() {

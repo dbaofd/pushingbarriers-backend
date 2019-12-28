@@ -4,6 +4,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="player")
@@ -35,6 +36,11 @@ public class Player {
 
     @Column(nullable = false, name = "playerStatus")
     private Integer playerStatus=1;
+
+    @ManyToMany
+    @JoinTable(name = "player_team",joinColumns = @JoinColumn(name = "playerId"),
+            inverseJoinColumns = @JoinColumn(name = "teamId"))
+    private List<Team> teamList;
 
     public Integer getPlayerId() {
         return playerId;
@@ -106,5 +112,13 @@ public class Player {
 
     public void setPlayerStatus(Integer playerStatus) {
         this.playerStatus = playerStatus;
+    }
+
+    public List<Team> getTeamList() {
+        return teamList;
+    }
+
+    public void setTeamList(List<Team> teamList) {
+        this.teamList = teamList;
     }
 }
