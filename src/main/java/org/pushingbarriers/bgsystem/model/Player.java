@@ -1,14 +1,16 @@
 package org.pushingbarriers.bgsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name="player")
-public class Player {
+public class Player implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer playerId;
@@ -36,10 +38,14 @@ public class Player {
 
     @Column(nullable = false, name = "playerStatus")
     private Integer playerStatus=1;
-
+    //The Exception:Failed to write HTTP message: org.springframework.http.converter.HttpMessageNotWritableException:
+    //The fix is to get Jackson to be able to handle bi-directional references.
+    //And this is done by using two Annotations: @JsonManagedReference and @JsonBackReference.
+    //@JsonManagedReference is used to annotate the inverse side while @JsonBackReference maps the owning side of the relationship.
     @ManyToMany
     @JoinTable(name = "player_team",joinColumns = @JoinColumn(name = "playerId"),
             inverseJoinColumns = @JoinColumn(name = "teamId"))
+    @JsonBackReference
     private List<Team> teamList;
 
     public Integer getPlayerId() {

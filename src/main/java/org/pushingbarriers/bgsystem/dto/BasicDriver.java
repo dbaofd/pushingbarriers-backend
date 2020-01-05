@@ -1,12 +1,13 @@
 package org.pushingbarriers.bgsystem.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by baodong on 2019/12/11.
  */
 //Driver dto, no password included
-public class BasicDriver {
+public class BasicDriver implements Serializable {
     private Integer driverId;
 
     private String driverUserName;

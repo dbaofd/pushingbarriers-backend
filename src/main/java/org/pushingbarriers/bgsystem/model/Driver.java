@@ -1,11 +1,12 @@
 package org.pushingbarriers.bgsystem.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name="driver")
-public class Driver {
+public class Driver implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer driverId;

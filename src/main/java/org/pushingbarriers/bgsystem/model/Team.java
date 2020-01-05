@@ -1,6 +1,9 @@
 package org.pushingbarriers.bgsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,10 +16,11 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer teamId;
 
-    @Column(length = 100,nullable = false, name = "trainingDay")
+    @Column(length = 100,nullable = false, name = "teamName")
     private String teamName;
 
     @ManyToMany(mappedBy = "teamList")
+    @JsonManagedReference
     private List<Player> playerList;
 
     public Integer getTeamId() {
@@ -34,6 +38,8 @@ public class Team {
     public void setTeamName(String teamName) {
         this.teamName = teamName;
     }
-    //select a.* from player a
+
+
+//select a.* from player a
     //left join player_team pt on pt.player_id=a.player_id where pt.team_id=2
 }

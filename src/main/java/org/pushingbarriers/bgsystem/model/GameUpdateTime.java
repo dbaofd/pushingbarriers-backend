@@ -1,11 +1,12 @@
 package org.pushingbarriers.bgsystem.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name="gameupdatetime")
-public class GameUpdateTime {
+public class GameUpdateTime implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer gameupdatetimeId;

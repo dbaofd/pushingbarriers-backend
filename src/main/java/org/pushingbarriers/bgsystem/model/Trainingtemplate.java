@@ -1,13 +1,14 @@
 package org.pushingbarriers.bgsystem.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by baodong on 2019/12/2.
  */
 @Entity
 @Table(name="trainingtemplate")
-public class Trainingtemplate {
+public class Trainingtemplate implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer trainingId;
