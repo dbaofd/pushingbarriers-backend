@@ -1,6 +1,7 @@
 package org.pushingbarriers.bgsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.persistence.*;

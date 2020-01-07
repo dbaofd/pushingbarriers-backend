@@ -1,5 +1,7 @@
 package org.pushingbarriers.bgsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -21,6 +23,8 @@ public class Driver implements Serializable {
     private String driverGender;
 
     @Column(length = 100, nullable = false, name = "driverPassword")
+    @JsonIgnore
+    //When check driver info, no need to return password, json will ignore it.
     private String driverPassword;
 
     @Column(length = 15, nullable = false, name = "driverPhoneNum")

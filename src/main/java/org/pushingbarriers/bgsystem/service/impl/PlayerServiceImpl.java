@@ -52,7 +52,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     public List<Player> findPlayersByPlayerName(String playerName){
-        return playerDao.findPlayersByPlayerName(playerName);
+        return playerDao.findPlayersByPlayerNameContaining(playerName);
     }
 
     public void saveNewPlayer(String playerName, String playerGender, String playerPhoneNum, Date playerBirthDay,

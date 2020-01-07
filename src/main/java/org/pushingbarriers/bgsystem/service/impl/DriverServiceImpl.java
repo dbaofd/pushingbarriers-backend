@@ -2,6 +2,7 @@ package org.pushingbarriers.bgsystem.service.impl;
 
 import org.pushingbarriers.bgsystem.dao.DriverDao;
 import org.pushingbarriers.bgsystem.dto.BasicDriver;
+import org.pushingbarriers.bgsystem.model.Driver;
 import org.pushingbarriers.bgsystem.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,14 @@ public class DriverServiceImpl implements DriverService {
     private DriverDao driverDao;
 
     @Override
-    public List<BasicDriver> findAllDrivers(){
-        return driverDao.findAllDrivers();
+    public List<Driver> findAllDrivers(){
+        //return driverDao.findAllDrivers();
+        return driverDao.findAll();
     }
 
     @Override
-    public List<BasicDriver> findDriversByName(String driverName){
-        return driverDao.findDriversByName(driverName);
+    public List<Driver> findDriversByName(String driverName){
+        return driverDao.findDriversByDriverNameContaining(driverName);
     }
 
     @Override

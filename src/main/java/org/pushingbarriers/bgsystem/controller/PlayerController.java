@@ -2,9 +2,7 @@ package org.pushingbarriers.bgsystem.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import org.pushingbarriers.bgsystem.annotation.AuthToken;
-import org.pushingbarriers.bgsystem.dto.PlayerTeam;
 import org.pushingbarriers.bgsystem.model.Player;
-import org.pushingbarriers.bgsystem.model.Team;
 import org.pushingbarriers.bgsystem.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

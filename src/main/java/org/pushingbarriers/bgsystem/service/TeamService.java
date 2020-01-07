@@ -9,9 +9,9 @@ import java.util.List;
  * Created by baodong on 2019/12/27.
  */
 public interface TeamService {
-    public List<BasicTeam> findAllTeams();
+    List<BasicTeam> findAllTeams();
 
-    public List<Team> getAllPlayerTeamMapping();
+    List<Team> getAllPlayerTeamMapping();
 
-    public List<Team> findTeamByName(String name);
+    List<Team> findTeamByName(String name);
 }

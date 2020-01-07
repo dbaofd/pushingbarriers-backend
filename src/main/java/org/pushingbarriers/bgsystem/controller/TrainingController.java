@@ -24,7 +24,7 @@ public class TrainingController {
 
     @PostMapping(value="/updateConfirmation")
     @AuthToken
-    public JSONObject updateConfirmation(Integer id, String status){
+    public JSONObject updateConfirmation(Integer id, Integer status){
         JSONObject result = new JSONObject();
         trainingService.updateConfirmationStatus(id, status);
         result.put("msg","update status successfully");

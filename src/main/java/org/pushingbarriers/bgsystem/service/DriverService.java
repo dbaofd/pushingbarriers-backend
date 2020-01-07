@@ -1,6 +1,7 @@
 package org.pushingbarriers.bgsystem.service;
 
 import org.pushingbarriers.bgsystem.dto.BasicDriver;
+import org.pushingbarriers.bgsystem.model.Driver;
 
 import java.util.List;
 
@@ -8,9 +9,9 @@ import java.util.List;
  * Created by baodong on 2019/12/11.
  */
 public interface DriverService {
-    public List<BasicDriver> findAllDrivers();
+    List<Driver> findAllDrivers();
 
-    public List<BasicDriver> findDriversByName(String driverName);
+    List<Driver> findDriversByName(String driverName);
 
-    public void resetDriverPassword(String password, Integer id);
+    void resetDriverPassword(String password, Integer id);
 }

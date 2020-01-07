@@ -17,7 +17,7 @@ public class TrainingServiceImpl implements TrainingService {
         return trainingDao.findAll();
     }
 
-    public void updateConfirmationStatus(Integer id, String status){
+    public void updateConfirmationStatus(Integer id, Integer status){
         trainingDao.updateConfirmation(status,id);
     }
 

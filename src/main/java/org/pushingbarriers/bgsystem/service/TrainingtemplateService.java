@@ -8,5 +8,18 @@ import java.util.List;
  * Created by baodong on 2019/12/3.
  */
 public interface TrainingtemplateService {
-    public List<Trainingtemplate> findAllTrainingTemplateInfo();
+    List<Trainingtemplate> findAllTrainingTemplateInfo();
+
+    void updateTrainingtemplate(String day, String time, Integer playerId, String playerName,
+                                       String playerGender, Integer driverId, String driverName,
+                                       String driverGender, String club, String playerAddress,
+                                       String trainingAddress, Integer id);
+
+    void saveNewTraining(String day, String time, Integer playerId, String playerName,
+                                String playerGender, Integer driverId, String driverName,
+                                String driverGender, String club, String playerAddress,
+                                String trainingAddress);
+
+    void deleteTraining(Integer id);
 }
+

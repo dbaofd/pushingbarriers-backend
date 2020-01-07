@@ -3,6 +3,7 @@ package org.pushingbarriers.bgsystem.controller;
 import com.alibaba.fastjson.JSONObject;
 import org.pushingbarriers.bgsystem.annotation.AuthToken;
 import org.pushingbarriers.bgsystem.dto.BasicDriver;
+import org.pushingbarriers.bgsystem.model.Driver;
 import org.pushingbarriers.bgsystem.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,15 +21,15 @@ public class DriverController {
     @Autowired
     private DriverService driverService;
 
-    @GetMapping(value="/alldrivers")
+    @GetMapping(value="/allDrivers")
     @AuthToken
-    public List<BasicDriver> findAllDrivers(){
+    public List<Driver> findAllDrivers(){
         return driverService.findAllDrivers();
     }
 
     @GetMapping(value="/findDriversByName/{driverName}")
     @AuthToken
-    public List<BasicDriver> findDriversByName(@PathVariable(value = "driverName")String driverName){
+    public List<Driver> findDriversByName(@PathVariable(value = "driverName")String driverName){
         return driverService.findDriversByName(driverName);
     }
 

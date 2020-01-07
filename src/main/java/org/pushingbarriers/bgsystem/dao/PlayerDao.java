@@ -16,7 +16,7 @@ import java.util.List;
 
 @Repository
 public interface PlayerDao extends JpaRepository<Player,Integer> {
-    public List<Player> findPlayersByPlayerName(String playerName);
+    public List<Player> findPlayersByPlayerNameContaining(String playerName);
 
 //    @Query("update Player set playerName=?1,playerGender=?2,playerPhoneNum=?3, playerBirthday=?4," +
 //            "playerParentName=?5, playerParentPhoneNum=?6, playerAddress=?7 ,playerStatus=?8 where playerId=?9")

@@ -25,11 +25,17 @@ public class Trainingtemplate implements Serializable {
     @Column(length = 50, nullable = false, name = "trainingPlayer")
     private String trainingPlayer;
 
+    @Column(length = 15, nullable = false, name = "trainingPlayerGender")
+    private String trainingPlayerGender;
+
     @Column(nullable = false, name = "trainingDriverId")
     private Integer trainingDriverId;
 
     @Column(length = 50, nullable = false, name = "trainingDriver")
     private String trainingDriver;
+
+    @Column(length = 15, nullable = false, name = "trainingDriverGender")
+    private String trainingDriverGender;
 
     @Column(length = 150, nullable = false, name = "trainingClub")
     private String trainingClub;
@@ -41,11 +47,32 @@ public class Trainingtemplate implements Serializable {
     private String trainingAddress;
 
     @Column(length = 10, nullable = false, name = "trainingConfirmation")
-    private String trainingConfirmation;
+    private Integer trainingConfirmation=0;
 
     @Column(length = 500, name = "trainingNote")
     private String trainingNote;
 
+    public Trainingtemplate(){
+
+    }
+
+    public Trainingtemplate(String day, String time, Integer playerId, String playerName,
+                            String playerGender, Integer driverId, String driverName,
+                            String driverGender, String club, String playerAddress,
+                            String trainingAddress){
+        this.trainingDay=day;
+        this.trainingTime=time;
+        this.trainingPlayerId=playerId;
+        this.trainingPlayer=playerName;
+        this.trainingPlayerGender=playerGender;
+        this.trainingDriverId=driverId;
+        this.trainingDriver=driverName;
+        this.trainingDriverGender=driverGender;
+        this.trainingClub=club;
+        this.trainingPlayerAddress=playerAddress;
+        this.trainingAddress=trainingAddress;
+
+    }
     public Integer getTrainingId() {
         return trainingId;
     }
@@ -126,11 +153,11 @@ public class Trainingtemplate implements Serializable {
         this.trainingAddress = trainingAddress;
     }
 
-    public String getTrainingConfirmation() {
+    public Integer getTrainingConfirmation() {
         return trainingConfirmation;
     }
 
-    public void setTrainingConfirmation(String trainingConfirmation) {
+    public void setTrainingConfirmation(Integer trainingConfirmation) {
         this.trainingConfirmation = trainingConfirmation;
     }
 
@@ -140,5 +167,21 @@ public class Trainingtemplate implements Serializable {
 
     public void setTrainingNote(String trainingNote) {
         this.trainingNote = trainingNote;
+    }
+
+    public String getTrainingPlayerGender() {
+        return trainingPlayerGender;
+    }
+
+    public void setTrainingPlayerGender(String trainingPlayerGender) {
+        this.trainingPlayerGender = trainingPlayerGender;
+    }
+
+    public String getTrainingDriverGender() {
+        return trainingDriverGender;
+    }
+
+    public void setTrainingDriverGender(String trainingDriverGender) {
+        this.trainingDriverGender = trainingDriverGender;
     }
 }

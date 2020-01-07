@@ -12,7 +12,7 @@ public interface TrainingDao extends JpaRepository<Training,Integer> {
     @Query("update Training set trainingConfirmation=?1 where trainingId=?2")
     @Modifying
     @Transactional
-    public void updateConfirmation(String status, Integer id);
+    public void updateConfirmation(Integer status, Integer id);
     //Whenever you are trying to modify a record in db, you have to mark it
     //@Transactional as well as @Modifying, which instruct Spring that it can modify existing records.
 

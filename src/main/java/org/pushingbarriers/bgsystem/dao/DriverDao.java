@@ -16,12 +16,9 @@ import java.util.List;
 
 @Repository
 public interface DriverDao extends JpaRepository<Driver,Integer> {
-    @Query(value="select new org.pushingbarriers.bgsystem.dto.BasicDriver(driverId, driverUserName, driverName, driverGender, driverPhoneNum, driverPlateNum, driverBirthday, driverAddress, driverAvailability) from Driver ")
-    public List<BasicDriver> findAllDrivers();
-
-    @Query(value="select new org.pushingbarriers.bgsystem.dto.BasicDriver(driverId, driverUserName, driverName, driverGender, driverPhoneNum, driverPlateNum, driverBirthday, driverAddress, driverAvailability) from Driver where driverName= ?1")
-    public List<BasicDriver> findDriversByName(String driverName);
-
+//    @Query(value="select new org.pushingbarriers.bgsystem.dto.BasicDriver(driverId, driverUserName, driverName, driverGender, driverPhoneNum, driverPlateNum, driverBirthday, driverAddress, driverAvailability) from Driver where driverName= ?1")
+//    public List<BasicDriver> findDriversByName(String driverName);
+    public List<Driver> findDriversByDriverNameContaining(String driverName);
 
     @Query("update Driver set driverPassword=?1 where driverId=?2")
     @Modifying

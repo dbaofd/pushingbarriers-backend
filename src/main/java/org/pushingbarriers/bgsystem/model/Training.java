@@ -22,11 +22,17 @@ public class Training implements Serializable {
     @Column(length = 50, nullable = false, name = "trainingPlayer")
     private String trainingPlayer;
 
+    @Column(length = 15, nullable = false, name = "trainingPlayerGender")
+    private String trainingPlayerGender;
+
     @Column(nullable = false, name = "trainingDriverId")
     private Integer trainingDriverId;
 
     @Column(length = 50, nullable = false, name = "trainingDriver")
     private String trainingDriver;
+
+    @Column(length = 15, nullable = false, name = "trainingDriverGender")
+    private String trainingDriverGender;
 
     @Column(length = 150, nullable = false, name = "trainingClub")
     private String trainingClub;
@@ -37,8 +43,8 @@ public class Training implements Serializable {
     @Column(length = 170, nullable = false, name = "trainingAddress")
     private String trainingAddress;
 
-    @Column(length = 10, nullable = false, name = "trainingConfirmation")
-    private String trainingConfirmation;
+    @Column(nullable = false, name = "trainingConfirmation")
+    private Integer trainingConfirmation=0;
 
     @Column(length = 500, name = "trainingNote")
     private String trainingNote;
@@ -123,11 +129,11 @@ public class Training implements Serializable {
         this.trainingAddress = trainingAddress;
     }
 
-    public String getTrainingConfirmation() {
+    public Integer getTrainingConfirmation() {
         return trainingConfirmation;
     }
 
-    public void setTrainingConfirmation(String trainingConfirmation) {
+    public void setTrainingConfirmation(Integer trainingConfirmation) {
         this.trainingConfirmation = trainingConfirmation;
     }
 
@@ -137,5 +143,21 @@ public class Training implements Serializable {
 
     public void setTrainingNote(String trainingNote) {
         this.trainingNote = trainingNote;
+    }
+
+    public String getTrainingPlayerGender() {
+        return trainingPlayerGender;
+    }
+
+    public void setTrainingPlayerGender(String trainingPlayerGender) {
+        this.trainingPlayerGender = trainingPlayerGender;
+    }
+
+    public String getTrainingDriverGender() {
+        return trainingDriverGender;
+    }
+
+    public void setTrainingDriverGender(String trainingDriverGender) {
+        this.trainingDriverGender = trainingDriverGender;
     }
 }
