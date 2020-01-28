@@ -42,6 +42,14 @@ public class Driver implements Serializable {
     @Column(nullable = false, name = "driverAvailability")
     private Integer driverAvailability;
 
+    @Column(length = 200, name = "driverLicense")
+    @JsonIgnore
+    private String driverLicense;
+
+    @Column(length = 200, name = "driverBlueCard")
+    @JsonIgnore
+    private String driverBlueCard;
+
     public Integer getDriverId() {
         return driverId;
     }
@@ -120,5 +128,21 @@ public class Driver implements Serializable {
 
     public void setDriverAvailability(Integer driverAvailability) {
         this.driverAvailability = driverAvailability;
+    }
+
+    public String getDriverLicense() {
+        return driverLicense;
+    }
+
+    public void setDriverLicense(String driverLicense) {
+        this.driverLicense = driverLicense;
+    }
+
+    public String getDriverBlueCard() {
+        return driverBlueCard;
+    }
+
+    public void setDriverBlueCard(String driverBlueCard) {
+        this.driverBlueCard = driverBlueCard;
     }
 }

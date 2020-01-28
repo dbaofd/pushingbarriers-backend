@@ -30,9 +30,16 @@ public class TeamController {
     public List<Team> getAllPlayerTeamMapping(){
         return teamService.getAllPlayerTeamMapping();
     }
+
     @GetMapping(value = "/findTeamByName/{name}")
     @AuthToken
     public List<Team> getTeamByName(@PathVariable(value = "name") String name){
         return teamService.findTeamByName(name);
+    }
+
+    @GetMapping(value = "/findTeamsByClubName/{name}")
+    @AuthToken
+    public List<Team> getTeamsByClubName(@PathVariable(value = "name") String name){
+        return teamService.findTeamsByClubName(name);
     }
 }

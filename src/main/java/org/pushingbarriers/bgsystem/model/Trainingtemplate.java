@@ -2,6 +2,7 @@ package org.pushingbarriers.bgsystem.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by baodong on 2019/12/2.
@@ -12,6 +13,9 @@ public class Trainingtemplate implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer trainingId;
+
+    @Column(nullable = true, name = "trainingDate")
+    private Date trainingDate;
 
     @Column(length = 10,nullable = false, name = "trainingDay")
     private String trainingDay;
@@ -46,8 +50,8 @@ public class Trainingtemplate implements Serializable {
     @Column(length = 170, nullable = false, name = "trainingAddress")
     private String trainingAddress;
 
-    @Column(length = 10, nullable = false, name = "trainingConfirmation")
-    private Integer trainingConfirmation=0;
+    @Column(length = 10, nullable = false, name = "trainingStatus")
+    private Integer trainingStatus=0;
 
     @Column(length = 500, name = "trainingNote")
     private String trainingNote;
@@ -79,6 +83,14 @@ public class Trainingtemplate implements Serializable {
 
     public void setTrainingId(Integer trainingId) {
         this.trainingId = trainingId;
+    }
+
+    public Date getTrainingDate() {
+        return trainingDate;
+    }
+
+    public void setTrainingDate(Date trainingDate) {
+        this.trainingDate = trainingDate;
     }
 
     public String getTrainingDay() {
@@ -153,12 +165,12 @@ public class Trainingtemplate implements Serializable {
         this.trainingAddress = trainingAddress;
     }
 
-    public Integer getTrainingConfirmation() {
-        return trainingConfirmation;
+    public Integer getTrainingStatus() {
+        return trainingStatus;
     }
 
-    public void setTrainingConfirmation(Integer trainingConfirmation) {
-        this.trainingConfirmation = trainingConfirmation;
+    public void setTrainingStatus(Integer trainingConfirmation) {
+        this.trainingStatus = trainingConfirmation;
     }
 
     public String getTrainingNote() {

@@ -14,4 +14,10 @@ public interface DriverService {
     List<Driver> findDriversByName(String driverName);
 
     void resetDriverPassword(String password, Integer id);
+
+    Boolean driverExistence(String driverUserName);
+
+    Driver getDriver(String driverUserName);
+
+    void updateDriverInfo(Integer driverId, String driverPhoneNum, String driverPlateNum, String driverAddress);
 }

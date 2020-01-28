@@ -14,4 +14,6 @@ public interface TeamService {
     List<Team> getAllPlayerTeamMapping();
 
     List<Team> findTeamByName(String name);
+
+    List<Team> findTeamsByClubName(String name);
 }

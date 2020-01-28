@@ -32,4 +32,25 @@ public class DriverServiceImpl implements DriverService {
     public void resetDriverPassword(String password, Integer id){
         driverDao.resetDriverPassword(password,id);
     }
+
+    @Override
+    public Boolean driverExistence(String driverUserName){
+        return driverDao.existsDriverByDriverUserName(driverUserName);
+    }
+
+    @Override
+    public Driver getDriver(String driverUserName){
+        return driverDao.findDriverByDriverUserName(driverUserName);
+    }
+
+    @Override
+    public void updateDriverInfo(Integer driverId, String driverPhoneNum, String driverPlateNum, String driverAddress){
+        Driver driver=driverDao.findDriverByDriverId(driverId);
+        driver.setDriverPhoneNum(driverPhoneNum);
+        driver.setDriverPlateNum(driverPlateNum);
+        driver.setDriverAddress(driverAddress);
+        driverDao.save(driver);
+    }
+
+
 }

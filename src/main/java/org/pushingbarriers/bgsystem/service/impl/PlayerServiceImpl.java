@@ -29,7 +29,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     public void updatePlayerInfo(String name, String gender, String phoneNum, Date birthday,
-                                     String parentName, String parentPhoneNum, String address,Integer status, Integer id, Integer[] teams){
+                                     String parentName, String parentPhoneNum, String address,Integer status, Integer id, Integer[] teams, String photo){
         Player player=playerDao.findById(id).get();
         player.setPlayerName(name);
         player.setPlayerGender(gender);
@@ -39,6 +39,9 @@ public class PlayerServiceImpl implements PlayerService {
         player.setPlayerParentPhoneNum(parentPhoneNum);
         player.setPlayerAddress(address);
         player.setPlayerStatus(status);
+        if(photo!=null){
+            player.setPlayerPhoto(photo);
+        }
         if(teams.length!=0){
             List<Team> teamList=new ArrayList<>();
             for(int i=0;i<teams.length;i++){
@@ -56,7 +59,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     public void saveNewPlayer(String playerName, String playerGender, String playerPhoneNum, Date playerBirthDay,
-                              String playerParentName, String playerParentPhoneNum, String playerAddress, Integer[] playerTeams){
+                              String playerParentName, String playerParentPhoneNum, String playerAddress, Integer[] playerTeams, String playerPhoto){
         List<Team> teamList=new ArrayList<>();
         for(int i=0;i<playerTeams.length;i++){
             Team team=teamDao.findById(playerTeams[i]).get();
@@ -71,7 +74,12 @@ public class PlayerServiceImpl implements PlayerService {
         player.setPlayerParentName(playerParentName);
         player.setPlayerParentPhoneNum(playerParentPhoneNum);
         player.setPlayerAddress(playerAddress);
+        player.setPlayerPhoto(playerPhoto);
         playerDao.save(player);
+    }
+
+    public Player findPlayerByPlayerId(Integer playerId){
+        return playerDao.findPlayerByPlayerId(playerId);
     }
 
 }

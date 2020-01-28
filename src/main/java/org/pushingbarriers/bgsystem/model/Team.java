@@ -20,6 +20,9 @@ public class Team {
     @Column(length = 100,nullable = false, name = "teamName")
     private String teamName;
 
+    @Column(length = 100,nullable = false, name = "clubName")
+    private String clubName;
+
     @ManyToMany(mappedBy = "teamList")
     @JsonManagedReference
     private List<Player> playerList;
@@ -40,7 +43,22 @@ public class Team {
         this.teamName = teamName;
     }
 
+    public String getClubName() {
+        return clubName;
+    }
 
-//select a.* from player a
+    public void setClubName(String clubName) {
+        this.clubName = clubName;
+    }
+
+    public List<Player> getPlayerList() {
+        return playerList;
+    }
+
+    public void setPlayerList(List<Player> playerList) {
+        this.playerList = playerList;
+    }
+
+    //select a.* from player a
     //left join player_team pt on pt.player_id=a.player_id where pt.team_id=2
 }

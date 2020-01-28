@@ -13,10 +13,12 @@ public interface PlayerService {
     List<Player> findAllPlayers();
 
     void updatePlayerInfo(String name, String gender, String phoneNum, Date birthday,
-                                     String parentName, String parentPhoneNum, String address, Integer status, Integer id, Integer[] teamArray);
+                                     String parentName, String parentPhoneNum, String address, Integer status, Integer id, Integer[] teamArray, String photo);
 
     List<Player> findPlayersByPlayerName(String playerName);
 
     void saveNewPlayer(String playerName, String playerGender, String playerPhoneNum, Date playerBirthDay,
-                                String playerParentName, String playerParentPhoneNum, String playerAddress, Integer[] playerTeams);
+                                String playerParentName, String playerParentPhoneNum, String playerAddress, Integer[] playerTeams, String playerPhoto);
+
+    Player findPlayerByPlayerId(Integer playerId);
 }

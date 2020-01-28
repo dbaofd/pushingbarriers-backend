@@ -28,4 +28,8 @@ public class TeamServiceImpl implements TeamService {
     public List<Team> findTeamByName(String name){
         return teamDao.findTeamByTeamName(name);
     }
+
+    public List<Team> findTeamsByClubName(String name){
+        return teamDao.findTeamsByClubName(name);
+    }
 }

@@ -1,6 +1,7 @@
 package org.pushingbarriers.bgsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
@@ -39,6 +40,10 @@ public class Player implements Serializable {
 
     @Column(nullable = false, name = "playerStatus")
     private Integer playerStatus=1;
+
+    @Column(length = 200, nullable = false, name = "playerPhoto")
+    @JsonIgnore
+    private String playerPhoto;
     //The Exception:Failed to write HTTP message: org.springframework.http.converter.HttpMessageNotWritableException:
     //The fix is to get Jackson to be able to handle bi-directional references.
     //And this is done by using two Annotations: @JsonManagedReference and @JsonBackReference.
@@ -127,5 +132,13 @@ public class Player implements Serializable {
 
     public void setTeamList(List<Team> teamList) {
         this.teamList = teamList;
+    }
+
+    public String getPlayerPhoto() {
+        return playerPhoto;
+    }
+
+    public void setPlayerPhoto(String playerPhoto) {
+        this.playerPhoto = playerPhoto;
     }
 }

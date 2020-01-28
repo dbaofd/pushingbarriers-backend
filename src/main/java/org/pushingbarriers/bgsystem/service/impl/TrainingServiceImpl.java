@@ -17,11 +17,11 @@ public class TrainingServiceImpl implements TrainingService {
         return trainingDao.findAll();
     }
 
-    public void updateConfirmationStatus(Integer id, Integer status){
+    public void updateTrainingStatus(Integer id, Integer status){
         trainingDao.updateConfirmation(status,id);
     }
 
-    public void updateTrainingDetail(String driver, String time, String status,String note, Integer id){
-        trainingDao.updateTrainingDetail(driver, time, status,note, id);
+    public void updateTrainingDetail(String driver,Integer driverId, String driverGender, String time, Integer status,String note, Integer id){
+        trainingDao.updateTrainingDetail(driver,driverId, driverGender, time, status,note, id);
     }
 }

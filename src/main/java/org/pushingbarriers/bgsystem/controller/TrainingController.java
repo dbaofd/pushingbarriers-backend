@@ -22,20 +22,20 @@ public class TrainingController {
         return trainingService.findAllTrainings();
     }
 
-    @PostMapping(value="/updateConfirmation")
+    @PostMapping(value="/updateTrainingStatus")
     @AuthToken
-    public JSONObject updateConfirmation(Integer id, Integer status){
+    public JSONObject updateTrainingStatus(Integer id, Integer status){
         JSONObject result = new JSONObject();
-        trainingService.updateConfirmationStatus(id, status);
+        trainingService.updateTrainingStatus(id, status);
         result.put("msg","update status successfully");
         return result;
     }
 
     @PostMapping(value="/updateTrainingDetail")
     @AuthToken
-    public JSONObject updateTrainingDetail(String driver, String time, String status, String note, Integer id){
+    public JSONObject updateTrainingDetail(String driver,Integer driverId, String driverGender, String time, Integer status, String note, Integer id){
         JSONObject result = new JSONObject();
-        trainingService.updateTrainingDetail(driver,time, status, note, id);
+        trainingService.updateTrainingDetail(driver,driverId,driverGender,time, status, note, id);
         result.put("msg","update training detail successfully");
         return result;
     }

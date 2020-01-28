@@ -1,0 +1,2 @@
+1. config springboot virtual picture path
+2. set up max-file-size in springboot 2.x: use spring.servlet.multipart.maxFileSize   spring.servlet.multipart.maxRequestSize

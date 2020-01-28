@@ -16,7 +16,7 @@ import java.util.List;
 
 @Repository
 public interface DriverDao extends JpaRepository<Driver,Integer> {
-//    @Query(value="select new org.pushingbarriers.bgsystem.dto.BasicDriver(driverId, driverUserName, driverName, driverGender, driverPhoneNum, driverPlateNum, driverBirthday, driverAddress, driverAvailability) from Driver where driverName= ?1")
+//    @Query(value="select new org.pushingbarriers.bgsystem.dto.BasicDriver(driverId, driverUserName, driverName, driverGender, driverPhoneNum, driverPlateNum, driverBirthday, driverAddress, driverAvailability) from Driver where driverName like concat('%',?1,'%')")
 //    public List<BasicDriver> findDriversByName(String driverName);
     public List<Driver> findDriversByDriverNameContaining(String driverName);
 
@@ -24,4 +24,11 @@ public interface DriverDao extends JpaRepository<Driver,Integer> {
     @Modifying
     @Transactional
     public void resetDriverPassword(String password, Integer id);
+
+    public Boolean existsDriverByDriverUserName(String driverUserName);
+
+    //@Query(value="select new org.pushingbarriers.bgsystem.dto.BasicDriver(driverId, driverUserName, driverName, driverGender, driverPhoneNum, driverPlateNum, driverBirthday, driverAddress, driverAvailability) from Driver where driverUserName = ?1")
+    public Driver findDriverByDriverUserName(String driverUserName);
+
+    public Driver findDriverByDriverId(Integer id);
 }
