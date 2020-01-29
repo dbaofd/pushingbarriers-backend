@@ -6,6 +6,7 @@ import org.pushingbarriers.bgsystem.annotation.AuthToken;
 import org.pushingbarriers.bgsystem.model.Player;
 import org.pushingbarriers.bgsystem.service.PlayerService;
 import org.pushingbarriers.bgsystem.util.ImagePath;
+import org.pushingbarriers.bgsystem.util.MyTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
@@ -54,27 +55,14 @@ public class PlayerController {
                                        String parentName, String parentPhoneNum, String address, Integer status, Integer id, Integer[] teams){
         String prefix=photo.getOriginalFilename().substring(photo.getOriginalFilename().lastIndexOf(".")+1);//获取后缀名
         String fileName=name+System.currentTimeMillis()+"."+prefix;
-        try {
-            //获取输出流
-            OutputStream os=new FileOutputStream(ImagePath.IMAGE_PATH+fileName);
-            //获取输入流 CommonsMultipartFile 中可以直接得到文件的流
-            InputStream is=photo.getInputStream();
-            int temp;
-            //一个一个字节的读取并写入
-            while((temp=is.read())!=(-1))
-            {
-                os.write(temp);
-            }
-            os.flush();
-            os.close();
-            is.close();
 
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Player player=playerService.findPlayerByPlayerId(id);
+        String oldImgName=player.getPlayerPhoto();
+        if(oldImgName!=null) {
+            MyTools.deleteImg(ImagePath.IMAGE_PATH_PLAYER_PHOTO, oldImgName);
         }
+
+        MyTools.saveImg(photo,ImagePath.IMAGE_PATH_PLAYER_PHOTO,fileName);
         playerService.updatePlayerInfo(name,gender,phoneNum,birthday,parentName,parentPhoneNum,address,status, id,teams, fileName);
         JSONObject result = new JSONObject();
         result.put("msg","update player info successfully");
@@ -94,28 +82,7 @@ public class PlayerController {
         //playerService.insertNewPlayer(playerName,playerGender,playerPhoneNum,playerBirthDay,playerParentName,playerParentPhoneNum,playerAddress);
         String prefix=playerPhoto.getOriginalFilename().substring(playerPhoto.getOriginalFilename().lastIndexOf(".")+1);//获取后缀名
         String fileName=playerName+System.currentTimeMillis()+"."+prefix;
-        try {
-            //获取输出流
-            OutputStream os=new FileOutputStream(ImagePath.IMAGE_PATH+fileName);
-            //获取输入流 CommonsMultipartFile 中可以直接得到文件的流
-            InputStream is=playerPhoto.getInputStream();
-            int temp;
-            //一个一个字节的读取并写入
-            while((temp=is.read())!=(-1))
-            {
-                os.write(temp);
-            }
-            os.flush();
-            os.close();
-            is.close();
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        MyTools.saveImg(playerPhoto,ImagePath.IMAGE_PATH_PLAYER_PHOTO,fileName);
         playerService.saveNewPlayer(playerName,playerGender,playerPhoneNum,playerBirthDay,playerParentName,playerParentPhoneNum,playerAddress,teamList, fileName);
         JSONObject result = new JSONObject();
         result.put("msg","insert new player successfully");
@@ -123,32 +90,11 @@ public class PlayerController {
     }
 
 
-    @GetMapping(value = "/download/{playerId}")
+    @GetMapping(value = "/downloadPlayerPhoto/{playerId}")
     @AuthToken
-    public ResponseEntity<FileSystemResource> getFile(@PathVariable("playerId") Integer playerId) throws FileNotFoundException {
+    public ResponseEntity<FileSystemResource> downloadDriverPhoto(@PathVariable("playerId") Integer playerId) throws FileNotFoundException {
         Player player=playerService.findPlayerByPlayerId(playerId);
         String imgName=player.getPlayerPhoto();
-        File file = new File(ImagePath.IMAGE_PATH, imgName);
-        if (file.exists()) {
-            return export(file);
-        }
-        System.out.println(file);
-        return null;
+        return MyTools.exportImg(ImagePath.IMAGE_PATH_PLAYER_PHOTO,imgName);
     }
-
-
-    public ResponseEntity<FileSystemResource> export(File file) {
-        if (file == null) {
-            return null;
-        }
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        headers.add("Content-Disposition", "attachment; filename=" + file.getName());
-        headers.add("Pragma", "no-cache");
-        headers.add("Expires", "0");
-        headers.add("Last-Modified", new Date().toString());
-        headers.add("ETag", String.valueOf(System.currentTimeMillis()));
-        return ResponseEntity.ok().headers(headers).contentLength(file.length()).contentType(MediaType.parseMediaType("application/octet-stream")).body(new FileSystemResource(file));
-    }
-
 }

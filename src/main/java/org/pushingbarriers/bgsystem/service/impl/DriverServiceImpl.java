@@ -44,6 +44,11 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    public Driver findDriverById(Integer driverId){
+        return driverDao.findDriverByDriverId(driverId);
+    }
+
+    @Override
     public void updateDriverInfo(Integer driverId, String driverPhoneNum, String driverPlateNum, String driverAddress){
         Driver driver=driverDao.findDriverByDriverId(driverId);
         driver.setDriverPhoneNum(driverPhoneNum);
@@ -52,5 +57,18 @@ public class DriverServiceImpl implements DriverService {
         driverDao.save(driver);
     }
 
+    @Override
+    public void updateDriverLicense(Integer driverId, String driverLicense){
+        Driver driver=driverDao.findDriverByDriverId(driverId);
+        driver.setDriverLicense(driverLicense);
+        driverDao.save(driver);
+    }
+
+    @Override
+    public void updateDriverBluecard(Integer driverId, String driverBluecard){
+        Driver driver=driverDao.findDriverByDriverId(driverId);
+        driver.setDriverBlueCard(driverBluecard);
+        driverDao.save(driver);
+    }
 
 }

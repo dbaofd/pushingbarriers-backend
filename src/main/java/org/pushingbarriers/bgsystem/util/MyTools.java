@@ -1,5 +1,12 @@
 package org.pushingbarriers.bgsystem.util;
 
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
@@ -102,4 +109,61 @@ public class MyTools {
         return cal.getTime();
     }
 
+    public static ResponseEntity<FileSystemResource> exportImg(String imgPath, String imgName) {
+        if(imgName!=null) {
+            File file = new File(imgPath, imgName);
+            if (file.exists()) {
+                if (file == null) {
+                    return null;
+                }
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+                headers.add("Content-Disposition", "attachment; filename=" + file.getName());
+                headers.add("Pragma", "no-cache");
+                headers.add("Expires", "0");
+                headers.add("Last-Modified", new Date().toString());
+                headers.add("ETag", String.valueOf(System.currentTimeMillis()));
+                return ResponseEntity.ok().headers(headers).contentLength(file.length()).contentType(MediaType.parseMediaType("application/octet-stream")).body(new FileSystemResource(file));
+
+            }
+        }
+        return null;
+    }
+
+    public static void saveImg(MultipartFile img, String imgPath, String imgName){
+        try {
+            //获取输出流
+            OutputStream os=new FileOutputStream(imgPath+imgName);
+            //获取输入流 CommonsMultipartFile 中可以直接得到文件的流
+            InputStream is=img.getInputStream();
+            int temp;
+            //一个一个字节的读取并写入
+            while((temp=is.read())!=(-1))
+            {
+                os.write(temp);
+            }
+            os.flush();
+            os.close();
+            is.close();
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteImg(String imgPath, String imgName){
+        File file = new File(imgPath+imgName);
+        if (file.exists() && file.isFile()) {
+            if (file.delete()) {
+                System.out.println("delete " + imgPath+imgName + " successfully!");
+            } else {
+                System.out.println("delete" + imgPath+imgName + " failed!");
+            }
+        } else {
+            System.out.println(imgPath+imgName + " doesn't exist!！");
+        }
+    }
 }

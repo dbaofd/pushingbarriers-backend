@@ -19,5 +19,11 @@ public interface DriverService {
 
     Driver getDriver(String driverUserName);
 
+    Driver findDriverById(Integer driverId);
+
     void updateDriverInfo(Integer driverId, String driverPhoneNum, String driverPlateNum, String driverAddress);
+
+    void updateDriverLicense(Integer driverId, String driverLicense);
+
+    void updateDriverBluecard(Integer driverId, String driverBluecard);
 }
