@@ -14,9 +14,9 @@ import java.util.List;
 @Repository
 public interface TeamDao extends JpaRepository<Team,Integer> {
     @Query(value="select new org.pushingbarriers.bgsystem.dto.BasicTeam(teamId, teamName) from Team")
-    public List<BasicTeam> findTeams();
+    List<BasicTeam> findTeams();
 
-    public List<Team> findTeamByTeamName(String name);
+    List<Team> findTeamByTeamName(String name);
 
-    public List<Team> findTeamsByClubName(String name);
+    List<Team> findTeamsByClubName(String name);
 }

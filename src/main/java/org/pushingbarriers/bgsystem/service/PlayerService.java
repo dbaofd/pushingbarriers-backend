@@ -17,8 +17,12 @@ public interface PlayerService {
 
     List<Player> findPlayersByPlayerName(String playerName);
 
+    List<Player> findPlayersByPlayerNameAndPlayerStatus(String playerName, Integer playerStatus);
+
+    List<Player> findPlayersByPlayerStatus(Integer status);
+
     void saveNewPlayer(String playerName, String playerGender, String playerPhoneNum, Date playerBirthDay,
-                                String playerParentName, String playerParentPhoneNum, String playerAddress, Integer[] playerTeams, String playerPhoto);
+                                String playerParentName, String playerParentPhoneNum, String playerAddress,Integer playerStatus, Integer[] playerTeams, String playerPhoto);
 
     Player findPlayerByPlayerId(Integer playerId);
 }

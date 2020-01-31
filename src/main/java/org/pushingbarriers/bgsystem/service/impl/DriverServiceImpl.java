@@ -29,6 +29,15 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    public List<Driver> findDriversByNameAndAvailability(String driverName, Integer driverAvailability){
+        return driverDao.findDriversByDriverNameContainingAndDriverAvailability(driverName,driverAvailability);
+    }
+
+    public List<Driver> findDriversByDriverAvailability(Integer driverAvailability){
+        return driverDao.findDriversByDriverAvailability(driverAvailability);
+    }
+
+    @Override
     public void resetDriverPassword(String password, Integer id){
         driverDao.resetDriverPassword(password,id);
     }

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdminDao extends JpaRepository<Admin,Integer> {
-    public Admin findAdminByAdminUsername(String adminName);
+    Admin findAdminByAdminUsername(String adminName);
 
-    public Boolean existsAdminByAdminUsername(String adminName);
+    Boolean existsAdminByAdminUsername(String adminName);
 
 }

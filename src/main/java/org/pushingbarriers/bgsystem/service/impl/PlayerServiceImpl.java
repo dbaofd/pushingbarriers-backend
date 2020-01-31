@@ -58,8 +58,16 @@ public class PlayerServiceImpl implements PlayerService {
         return playerDao.findPlayersByPlayerNameContaining(playerName);
     }
 
+    public List<Player> findPlayersByPlayerNameAndPlayerStatus(String playerName, Integer playerStatus){
+        return playerDao.findPlayersByPlayerNameContainingAndPlayerStatus(playerName,playerStatus);
+    }
+
+    public List<Player> findPlayersByPlayerStatus(Integer status){
+        return playerDao.findPlayersByPlayerStatus(status);
+    }
+
     public void saveNewPlayer(String playerName, String playerGender, String playerPhoneNum, Date playerBirthDay,
-                              String playerParentName, String playerParentPhoneNum, String playerAddress, Integer[] playerTeams, String playerPhoto){
+                              String playerParentName, String playerParentPhoneNum, String playerAddress, Integer playerStatus, Integer[] playerTeams, String playerPhoto){
         List<Team> teamList=new ArrayList<>();
         for(int i=0;i<playerTeams.length;i++){
             Team team=teamDao.findById(playerTeams[i]).get();
@@ -74,6 +82,7 @@ public class PlayerServiceImpl implements PlayerService {
         player.setPlayerParentName(playerParentName);
         player.setPlayerParentPhoneNum(playerParentPhoneNum);
         player.setPlayerAddress(playerAddress);
+        player.setPlayerStatus(playerStatus);
         player.setPlayerPhoto(playerPhoto);
         playerDao.save(player);
     }

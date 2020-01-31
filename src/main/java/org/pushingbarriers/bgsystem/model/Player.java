@@ -39,7 +39,7 @@ public class Player implements Serializable {
     private String playerParentPhoneNum;
 
     @Column(nullable = false, name = "playerStatus")
-    private Integer playerStatus=1;
+    private Integer playerStatus;
 
     @Column(length = 200, nullable = false, name = "playerPhoto")
     @JsonIgnore

@@ -40,10 +40,19 @@ public class DriverController {
         return driverService.findAllDrivers();
     }
 
-    @GetMapping(value="/findDriversByName/{driverName}")
+    @GetMapping(value="/findDriversByName/{driverName}/{driverAvailability}")
     @AuthToken
-    public List<Driver> findDriversByName(@PathVariable(value = "driverName")String driverName){
-        return driverService.findDriversByName(driverName);
+    public List<Driver> findDriversByName(@PathVariable(value = "driverName")String driverName, @PathVariable(value = "driverAvailability")Integer driverAvailability){
+        if(driverAvailability==3) {
+            return driverService.findDriversByName(driverName);
+        }
+        return driverService.findDriversByNameAndAvailability(driverName,driverAvailability);
+    }
+
+    @GetMapping(value="/findDriversByDriverAvailability/{driverAvailability}")
+    @AuthToken
+    public List<Driver> findDriversByDriverAvailability(@PathVariable(value = "driverAvailability")Integer driverAvailability){
+        return driverService.findDriversByDriverAvailability(driverAvailability);
     }
 
     @PostMapping(value="/resetDriverPassword")

@@ -13,6 +13,10 @@ public interface DriverService {
 
     List<Driver> findDriversByName(String driverName);
 
+    List<Driver> findDriversByNameAndAvailability(String driverName, Integer driverAvailability);
+
+    List<Driver> findDriversByDriverAvailability(Integer driverAvailability);
+
     void resetDriverPassword(String password, Integer id);
 
     Boolean driverExistence(String driverUserName);

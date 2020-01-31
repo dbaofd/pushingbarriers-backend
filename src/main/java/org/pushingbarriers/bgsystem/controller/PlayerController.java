@@ -69,21 +69,30 @@ public class PlayerController {
         return result;
     }
 
-    @GetMapping(value = "/findPlayersByPlayerName/{playerName}")
+    @GetMapping(value = "/findPlayersByPlayerName/{playerName}/{playerStatus}")
     @AuthToken
-    public List<Player> findPlayersByPlayerName(@PathVariable(value = "playerName") String playerName){
-        return playerService.findPlayersByPlayerName(playerName);
+    public List<Player> findPlayersByPlayerName(@PathVariable(value = "playerName") String playerName, @PathVariable(value = "playerStatus") Integer playerStatus){
+        if(playerStatus==3) {
+            return playerService.findPlayersByPlayerName(playerName);
+        }
+        return playerService.findPlayersByPlayerNameAndPlayerStatus(playerName,playerStatus);
+    }
+
+    @GetMapping(value = "/findPlayersByPlayerStatus/{playerStatus}")
+    @AuthToken
+    public List<Player> findPlayersByPlayerStatus(@PathVariable(value = "playerStatus") Integer playerStatus){
+        return playerService.findPlayersByPlayerStatus(playerStatus);
     }
 
     @PostMapping(value="/insertNewPlayer")
     @AuthToken
     public JSONObject insertNewPlayer(@RequestParam("playerPhoto") MultipartFile playerPhoto, String playerName, String playerGender, String playerPhoneNum, Date playerBirthDay,
-                                      String playerParentName, String playerParentPhoneNum, String playerAddress, Integer[] teamList){
+                                      String playerParentName, String playerParentPhoneNum, String playerAddress, Integer playerStatus, Integer[] teamList){
         //playerService.insertNewPlayer(playerName,playerGender,playerPhoneNum,playerBirthDay,playerParentName,playerParentPhoneNum,playerAddress);
         String prefix=playerPhoto.getOriginalFilename().substring(playerPhoto.getOriginalFilename().lastIndexOf(".")+1);//获取后缀名
         String fileName=playerName+System.currentTimeMillis()+"."+prefix;
         MyTools.saveImg(playerPhoto,ImagePath.IMAGE_PATH_PLAYER_PHOTO,fileName);
-        playerService.saveNewPlayer(playerName,playerGender,playerPhoneNum,playerBirthDay,playerParentName,playerParentPhoneNum,playerAddress,teamList, fileName);
+        playerService.saveNewPlayer(playerName,playerGender,playerPhoneNum,playerBirthDay,playerParentName,playerParentPhoneNum,playerAddress,playerStatus,teamList, fileName);
         JSONObject result = new JSONObject();
         result.put("msg","insert new player successfully");
         return result;

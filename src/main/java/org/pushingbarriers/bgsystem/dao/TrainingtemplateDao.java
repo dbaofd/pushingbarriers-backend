@@ -14,5 +14,5 @@ import org.springframework.transaction.annotation.Transactional;
 public interface TrainingtemplateDao extends JpaRepository<Trainingtemplate,Integer> {
     @Modifying
     @Transactional
-    public void deleteByTrainingId(Integer id);
+    void deleteByTrainingId(Integer id);
 }
