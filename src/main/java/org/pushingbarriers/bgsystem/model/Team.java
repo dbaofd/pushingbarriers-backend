@@ -23,16 +23,12 @@ public class Team {
     @Column(length = 100,nullable = false, name = "clubName")
     private String clubName;
 
-    @ManyToMany(mappedBy = "teamList")
+    @ManyToMany(mappedBy = "teamList",fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Player> playerList;
 
     public Integer getTeamId() {
         return teamId;
-    }
-
-    public void setTeamId(Integer teamId) {
-        this.teamId = teamId;
     }
 
     public String getTeamName() {

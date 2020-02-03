@@ -20,10 +20,6 @@ public class Admin implements Serializable {
         return adminId;
     }
 
-    public void setAdminId(Integer adminId) {
-        this.adminId = adminId;
-    }
-
     public String getAdminUsername() {
         return adminUsername;
     }

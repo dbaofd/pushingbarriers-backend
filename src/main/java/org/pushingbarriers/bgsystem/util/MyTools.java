@@ -71,6 +71,13 @@ public class MyTools {
         return nextWeekDates;
     }
 
+    public static Date getLastWeekSunday() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(getThisWeekMonday());
+        cal.add(Calendar.DATE, -1);
+        return cal.getTime();
+    }
+
     public static Date getThisWeekMonday() {
         Date date = new Date();
         Calendar cal = Calendar.getInstance();
@@ -79,14 +86,12 @@ public class MyTools {
         cal.setFirstDayOfWeek(Calendar.MONDAY);
         // get the day of this Date in this week
         int day = cal.get(Calendar.DAY_OF_WEEK);
+        if(day==1){//cal.get(Calendar.DAY_OF_WEEK) if the day is Sunday, the returned value is 1, 2 for Monday
+            //7 for Saturday. cal.getFirstDayOfWeek() is 2, if the day is Sunday, 2-1=1, then bug occurs when get this week Monday.
+            //so set day value to 8 can solve the problem.
+            day=8;
+        }
         cal.add(Calendar.DATE, cal.getFirstDayOfWeek() - day);
-        return cal.getTime();
-    }
-
-    public static Date getNextWeekMonday() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(getThisWeekMonday());
-        cal.add(Calendar.DATE, 7);
         return cal.getTime();
     }
 
@@ -98,7 +103,45 @@ public class MyTools {
         cal.setFirstDayOfWeek(Calendar.MONDAY);
         // get the day of this Date in this week
         int day = cal.get(Calendar.DAY_OF_WEEK);
+        if(day==1){
+            day=8;
+        }
         cal.add(Calendar.DATE, cal.getFirstDayOfWeek() + 6 - day);
+        return cal.getTime();
+    }
+
+    public static Date getNextWeekMonday() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(getThisWeekMonday());
+        cal.add(Calendar.DATE, 7);
+        return cal.getTime();
+    }
+
+    public static Date getNextWeekTuesday() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(getThisWeekMonday());
+        cal.add(Calendar.DATE, 8);
+        return cal.getTime();
+    }
+
+    public static Date getNextWeekWednesday() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(getThisWeekMonday());
+        cal.add(Calendar.DATE, 9);
+        return cal.getTime();
+    }
+
+    public static Date getNextWeekThursday() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(getThisWeekMonday());
+        cal.add(Calendar.DATE, 10);
+        return cal.getTime();
+    }
+
+    public static Date getNextWeekFriday() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(getThisWeekMonday());
+        cal.add(Calendar.DATE, 11);
         return cal.getTime();
     }
 

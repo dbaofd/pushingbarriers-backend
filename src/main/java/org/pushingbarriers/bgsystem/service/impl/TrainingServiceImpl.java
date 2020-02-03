@@ -24,4 +24,8 @@ public class TrainingServiceImpl implements TrainingService {
     public void updateTrainingDetail(String driver,Integer driverId, String driverGender, String time, Integer status,String note, Integer id){
         trainingDao.updateTrainingDetail(driver,driverId, driverGender, time, status,note, id);
     }
+
+    public List<Training> findTrainingsByStatus(Integer status){
+        return trainingDao.findTrainingsByTrainingStatus(status);
+    }
 }

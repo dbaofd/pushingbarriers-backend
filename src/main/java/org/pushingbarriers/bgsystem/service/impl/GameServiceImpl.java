@@ -39,10 +39,10 @@ public class GameServiceImpl implements GameService {
             sortedValue = "gameId";
         }
         if (period.equals(Period.THISWEEK.toString())) {//this weeks game info
-            startDate = MyTools.getThisWeekMonday();
+            startDate = MyTools.getLastWeekSunday();
             endDate = MyTools.getThisWeekSunday();
         } else if (period.equals(Period.NEXTWEEK.toString())) {//next weeks game info
-            startDate = MyTools.getNextWeekMonday();
+            startDate = MyTools.getThisWeekSunday();
             endDate = MyTools.getNextWeekSunday();
         }
         Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.Direction.ASC, sortedValue);

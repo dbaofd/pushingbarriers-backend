@@ -18,10 +18,6 @@ public class GameUpdateTime implements Serializable {
         return gameupdatetimeId;
     }
 
-    public void setGameupdatetimeId(Integer gameupdatetimeId) {
-        this.gameupdatetimeId = gameupdatetimeId;
-    }
-
     public Date getGameupdatetimeDate() {
         return gameupdatetimeDate;
     }

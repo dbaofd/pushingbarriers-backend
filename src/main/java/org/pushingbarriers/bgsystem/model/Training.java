@@ -11,7 +11,7 @@ public class Training implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer trainingId;
 
-    @Column(nullable = true, name = "trainingDate")
+    @Column(name = "trainingDate")
     private Date trainingDate;
 
     @Column(length = 10,nullable = false, name = "trainingDay")
@@ -53,12 +53,30 @@ public class Training implements Serializable {
     @Column(length = 500, name = "trainingNote")
     private String trainingNote;
 
-    public Integer getTrainingId() {
-        return trainingId;
+    public Training(){}
+    public Training(Date trainingDate,String trainingDay,
+                    String trainingTime,Integer trainingPlayerId,String trainingPlayer,
+                    String trainingPlayerGender,Integer trainingDriverId,String trainingDriver,
+                    String trainingDriverGender,String trainingClub,String trainingPlayerAddress,
+                    String trainingAddress, Integer trainingStatus,String trainingNote){
+        this.trainingDate=trainingDate;
+        this.trainingDay=trainingDay;
+        this.trainingTime=trainingTime;
+        this.trainingPlayerId=trainingPlayerId;
+        this.trainingPlayer=trainingPlayer;
+        this.trainingPlayerGender=trainingPlayerGender;
+        this.trainingDriverId=trainingDriverId;
+        this.trainingDriver=trainingDriver;
+        this.trainingDriverGender=trainingDriverGender;
+        this.trainingClub=trainingClub;
+        this.trainingPlayerAddress=trainingPlayerAddress;
+        this.trainingAddress=trainingAddress;
+        this.trainingStatus=trainingStatus;
+        this.trainingNote=trainingNote;
     }
 
-    public void setTrainingId(Integer trainingId) {
-        this.trainingId = trainingId;
+    public Integer getTrainingId() {
+        return trainingId;
     }
 
     public Date getTrainingDate() {

@@ -54,10 +54,6 @@ public class Driver implements Serializable {
         return driverId;
     }
 
-    public void setDriverId(Integer driverId) {
-        this.driverId = driverId;
-    }
-
     public String getDriverUserName() {
         return driverUserName;
     }

@@ -19,6 +19,8 @@ public interface GameDao extends JpaRepository<Game,Integer> {
 
     Page<Game> findGamesByGameDateBetween(Date startDate, Date endDate, Pageable pageable);
 
+    List<Game> findGamesByGameDateBetween(Date startDate, Date endDate);
+
     Page<Game> findGamesByGameDateBetweenAndGameTeam(Date startDate, Date endDate, String gameTeam, Pageable pageable);
 
 

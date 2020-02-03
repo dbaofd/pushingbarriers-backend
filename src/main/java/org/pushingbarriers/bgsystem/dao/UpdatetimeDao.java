@@ -9,4 +9,6 @@ import java.util.Date;
 @Repository
 public interface UpdatetimeDao extends JpaRepository<GameUpdateTime,Integer> {
     GameUpdateTime findGameUpdateTimeByGameupdatetimeId(Integer id);
+
+    Boolean existsGameUpdateTimeByGameupdatetimeId(Integer id);
 }

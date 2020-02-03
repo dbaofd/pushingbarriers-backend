@@ -50,7 +50,7 @@ public class Trainingtemplate implements Serializable {
     @Column(length = 170, nullable = false, name = "trainingAddress")
     private String trainingAddress;
 
-    @Column(length = 10, nullable = false, name = "trainingStatus")
+    @Column(nullable = false, name = "trainingStatus")
     private Integer trainingStatus=0;
 
     @Column(length = 500, name = "trainingNote")
@@ -79,10 +79,6 @@ public class Trainingtemplate implements Serializable {
     }
     public Integer getTrainingId() {
         return trainingId;
-    }
-
-    public void setTrainingId(Integer trainingId) {
-        this.trainingId = trainingId;
     }
 
     public Date getTrainingDate() {

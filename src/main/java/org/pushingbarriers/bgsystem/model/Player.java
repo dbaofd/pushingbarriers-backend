@@ -48,7 +48,7 @@ public class Player implements Serializable {
     //The fix is to get Jackson to be able to handle bi-directional references.
     //And this is done by using two Annotations: @JsonManagedReference and @JsonBackReference.
     //@JsonManagedReference is used to annotate the inverse side while @JsonBackReference maps the owning side of the relationship.
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "player_team",joinColumns = @JoinColumn(name = "playerId"),
             inverseJoinColumns = @JoinColumn(name = "teamId"))
     @JsonBackReference
@@ -56,10 +56,6 @@ public class Player implements Serializable {
 
     public Integer getPlayerId() {
         return playerId;
-    }
-
-    public void setPlayerId(Integer playerId) {
-        this.playerId = playerId;
     }
 
     public String getPlayerName() {

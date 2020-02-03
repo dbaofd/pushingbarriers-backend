@@ -6,6 +6,7 @@ import org.pushingbarriers.bgsystem.model.Training;
 import org.pushingbarriers.bgsystem.service.TrainingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,5 +39,11 @@ public class TrainingController {
         trainingService.updateTrainingDetail(driver,driverId,driverGender,time, status, note, id);
         result.put("msg","update training detail successfully");
         return result;
+    }
+
+    @GetMapping("/getTrainingsByStatus/{status}")
+    @AuthToken
+    public List<Training> getTrainingsByStatus(@PathVariable(value = "status") Integer status){
+        return trainingService.findTrainingsByStatus(status);
     }
 }

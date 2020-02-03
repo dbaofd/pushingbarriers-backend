@@ -19,4 +19,6 @@ public interface TeamDao extends JpaRepository<Team,Integer> {
     List<Team> findTeamByTeamName(String name);
 
     List<Team> findTeamsByClubName(String name);
+
+    Team getTeamByTeamId(Integer id);
 }

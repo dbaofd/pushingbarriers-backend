@@ -10,4 +10,6 @@ public interface TrainingService {
     void updateTrainingStatus(Integer id, Integer status);
 
     void updateTrainingDetail(String driver,Integer driverId, String driverGender, String time, Integer status, String note, Integer id);
+
+    List<Training> findTrainingsByStatus(Integer status);
 }

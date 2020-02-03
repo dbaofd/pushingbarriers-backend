@@ -43,10 +43,6 @@ public class Game implements Serializable {
         return gameId;
     }
 
-    public void setGameId(Integer gameId) {
-        this.gameId = gameId;
-    }
-
     public Integer getGameTeamId() {
         return gameTeamId;
     }
