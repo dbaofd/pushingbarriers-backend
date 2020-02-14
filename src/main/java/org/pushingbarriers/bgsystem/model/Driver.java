@@ -39,6 +39,11 @@ public class Driver implements Serializable {
     @Column(length = 170, nullable = false, name = "driverAddress")
     private String driverAddress;
 
+    /**
+     * 0 stands for Temporarily Unavailable
+     * 1 stands for Available
+     * 2 stands for Permanently Unavailable
+     */
     @Column(nullable = false, name = "driverAvailability")
     private Integer driverAvailability;
 

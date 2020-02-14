@@ -126,26 +126,34 @@ public class DriverController {
         RedisHelper redisHelper=new RedisHelper();
         if(driverService.driverExistence(userName)){
             driver=driverService.getDriver(userName);
-            if(password.equals(driver.getDriverPassword())){
-                try {
-                    Jedis jedis = redisHelper.initializeJedis();
-                    String token = tokenGenerator.generate(userName, password);
-                    jedis.set(userName, token);
-                    //set key expire time
-                    jedis.expire(userName, ConstantKit.TOKEN_EXPIRE_TIME_FOR_APP);
-                    jedis.set(token, userName);
-                    jedis.expire(token, ConstantKit.TOKEN_EXPIRE_TIME_FOR_APP);
-                    Long currentTime = System.currentTimeMillis();
-                    jedis.set(token + userName, currentTime.toString());
-                    //close jedis
-                    redisHelper.closeJedis(jedis);
-                    result.put("msg", "success");
-                    result.put("token",token);
-                }catch (Exception e){
-                    result.put("msg", "fail_to_connect_radis");
+            if(driver.getDriverAvailability()!=3) {
+                if (password.equals(driver.getDriverPassword())) {
+                    try {
+                        Jedis jedis = redisHelper.initializeJedis();
+                        String token = tokenGenerator.generate(userName, password);
+                        jedis.set(userName, token);
+                        //set key expire time
+                        jedis.expire(userName, ConstantKit.TOKEN_EXPIRE_TIME_FOR_APP);
+                        jedis.set(token, userName);
+                        jedis.expire(token, ConstantKit.TOKEN_EXPIRE_TIME_FOR_APP);
+                        Long currentTime = System.currentTimeMillis();
+                        jedis.set(token + userName, currentTime.toString());
+                        jedis.expire(token + userName, ConstantKit.TOKEN_EXPIRE_TIME_FOR_APP);
+                        jedis.set(userName+"type", "driver");
+                        jedis.expire(userName+"type", ConstantKit.TOKEN_EXPIRE_TIME_FOR_APP);
+                        //close jedis
+                        redisHelper.closeJedis(jedis);
+                        result.put("msg", "success");
+                        result.put("token", token);
+                        result.put("driverInfo", driver);
+                    } catch (Exception e) {
+                        result.put("msg", "fail_to_connect_radis");
+                    }
+                } else {
+                    result.put("msg", "wrong_password");
                 }
             }else{
-                result.put("msg", "wrong_password");
+                result.put("msg", "invalid_account");
             }
         }else{
             result.put("msg", "wrong_username");
@@ -153,16 +161,21 @@ public class DriverController {
         return result;
     }
 
-    @GetMapping(value="/getDriverInfo/{driverUserName}")
-    @AppAPI
-    public Driver getDriverInfo(@PathVariable(value = "driverUserName") String driverUserName){
-        return driverService.getDriver((driverUserName));
-    }
-
     @PostMapping(value="/updateDriverInfo")
+    @AuthToken
     @AppAPI
     public JSONObject updateDriverInfo(Integer driverId, String driverPhoneNum, String driverPlateNum, String driverAddress){
         driverService.updateDriverInfo(driverId, driverPhoneNum, driverPlateNum, driverAddress);
+        JSONObject result=new JSONObject();
+        result.put("msg", "Update profile successfully");
+        return result;
+    }
+
+    @PostMapping(value="/updateDriverStatus")
+    @AuthToken
+    @AppAPI
+    public JSONObject updateDriverStatus(Integer driverId, Integer status){
+        driverService.updateDriverStatus(driverId, status);
         JSONObject result=new JSONObject();
         result.put("msg", "success");
         return result;

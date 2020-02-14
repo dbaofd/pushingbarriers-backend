@@ -51,10 +51,13 @@ public class Trip implements Serializable {
     private String tripAddress;
 
     @Column(nullable = false, name = "tripStatus")
-    private Integer tripStatus=0;
+    private Integer tripStatus;
 
     @Column(length = 500, name = "tripNote")
     private String tripNote;
+
+    @Column(nullable = false, name = "tripType")
+    private Integer tripType;
 
     public Trip(){}
 
@@ -62,7 +65,7 @@ public class Trip implements Serializable {
                     String tripTime,Integer tripPlayerId,String tripPlayer,
                     String tripPlayerGender,Integer tripDriverId,String tripDriver,
                     String tripDriverGender,String tripTeam,String tripPlayerAddress,
-                    String tripAddress, Integer tripStatus,String tripNote){
+                    String tripAddress, Integer tripStatus,String tripNote, Integer tripType){
         this.tripDate=tripDate;
         this.tripDay=tripDay;
         this.tripTime=tripTime;
@@ -77,6 +80,7 @@ public class Trip implements Serializable {
         this.tripAddress=tripAddress;
         this.tripStatus=tripStatus;
         this.tripNote=tripNote;
+        this.tripType=tripType;
     }
     public Integer getTripId() {
         return tripId;
@@ -192,5 +196,13 @@ public class Trip implements Serializable {
 
     public void setTripNote(String tripNote) {
         this.tripNote = tripNote;
+    }
+
+    public Integer getTripType() {
+        return tripType;
+    }
+
+    public void setTripType(Integer tripType) {
+        this.tripType = tripType;
     }
 }

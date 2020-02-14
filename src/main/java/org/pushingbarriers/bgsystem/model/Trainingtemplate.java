@@ -50,11 +50,25 @@ public class Trainingtemplate implements Serializable {
     @Column(length = 170, nullable = false, name = "trainingAddress")
     private String trainingAddress;
 
-    @Column(nullable = false, name = "trainingStatus")
-    private Integer trainingStatus=0;
+    /**
+     * 0 stands for unconfirmed
+     * 1 stands for confirmed
+     * 2 stands for refused
+     * 3 stands for cancelled
+      */
+    @Column(name = "trainingStatus")
+    private Integer trainingStatus;
 
     @Column(length = 500, name = "trainingNote")
     private String trainingNote;
+
+    /**
+     * 1 stands for return
+     * 2 stands for player address to training address
+     * 3 stands for training address to player address
+     */
+    @Column(name = "trainingType")
+    private Integer trainingType;
 
     public Trainingtemplate(){
 
@@ -191,5 +205,13 @@ public class Trainingtemplate implements Serializable {
 
     public void setTrainingDriverGender(String trainingDriverGender) {
         this.trainingDriverGender = trainingDriverGender;
+    }
+
+    public Integer getTrainingType() {
+        return trainingType;
+    }
+
+    public void setTrainingType(Integer trainingType) {
+        this.trainingType = trainingType;
     }
 }

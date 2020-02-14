@@ -15,7 +15,7 @@ public interface TrainingDao extends JpaRepository<Training,Integer> {
     @Query("update Training set trainingStatus=?1 where trainingId=?2")
     @Modifying
     @Transactional
-    void updateConfirmation(Integer status, Integer id);
+    void updateStatus(Integer status, Integer id);
     //Whenever you are trying to modify a record in db, you have to mark it
     //@Transactional as well as @Modifying, which instruct Spring that it can modify existing records.
 
@@ -31,6 +31,14 @@ public interface TrainingDao extends JpaRepository<Training,Integer> {
 
     List<Training> findTrainingsByTrainingStatus(Integer status);
 
-    @Query(value="select new org.pushingbarriers.bgsystem.model.Trip(trainingDate, trainingDay, trainingTime, trainingPlayerId, trainingPlayer, trainingPlayerGender, trainingDriverId, trainingDriver, trainingDriverGender, trainingClub, trainingPlayerAddress, trainingAddress, trainingStatus, trainingNote) from Training")
+    @Query(value="select new org.pushingbarriers.bgsystem.model.Trip(trainingDate, trainingDay, trainingTime, trainingPlayerId, trainingPlayer, trainingPlayerGender, trainingDriverId, trainingDriver, trainingDriverGender, trainingClub, trainingPlayerAddress, trainingAddress, trainingStatus, trainingNote, trainingType) from Training")
     List<Trip> findAllTrainings();
+
+    @Query(value="select * from training where training_driver_id=?1 and (training_status=0 or training_status=3)", nativeQuery = true)
+    List<Training> findUnconfirmedTrainingsByDriverId(Integer driverId);
+
+    Training findTrainingByTrainingId(Integer id);
+
+    @Query(value="select t from Training t  where t.trainingDriverId=?1 and (t.trainingStatus = 1 or t.trainingStatus = 2)")
+    List<Training> findConfirmedTrainingByDriverId(Integer driverId);
 }

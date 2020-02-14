@@ -11,4 +11,10 @@ public interface GameTripService {
     List<GameTrip> getAllGameTrips();
 
     List<GameTrip> getGameTripsByStatus(Integer status);
+
+    List<GameTrip> getGameTripsForDriver(String driverGender);
+
+    List<GameTrip> getConfirmedGamesByDriverId(Integer driverId);
+
+    void pickGame(Integer tripId, Integer tripType, Integer tripStatus, Integer tripDriverId, String tripDriver, String tripDriverGender, String tripNote );
 }

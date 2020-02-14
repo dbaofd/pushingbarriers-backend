@@ -30,4 +30,6 @@ public interface DriverService {
     void updateDriverLicense(Integer driverId, String driverLicense);
 
     void updateDriverBluecard(Integer driverId, String driverBluecard);
+
+    void updateDriverStatus(Integer driverId, Integer status);
 }

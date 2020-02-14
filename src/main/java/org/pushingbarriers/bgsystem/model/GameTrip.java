@@ -56,6 +56,27 @@ public class GameTrip implements Serializable {
     @Column(length = 500, name = "tripNote")
     private String tripNote;
 
+    @Column(nullable = false, name = "trainingType")
+    private Integer tripType=1;
+
+    public GameTrip(){}
+
+    public GameTrip(Date tripDate,String tripDay,
+                String tripTime,Integer tripPlayerId,String tripPlayer,
+                String tripPlayerGender,String tripTeam,String tripPlayerAddress,
+                String tripAddress, Integer tripType){
+        this.tripDate=tripDate;
+        this.tripDay=tripDay;
+        this.tripTime=tripTime;
+        this.tripPlayerId=tripPlayerId;
+        this.tripPlayer=tripPlayer;
+        this.tripPlayerGender=tripPlayerGender;
+        this.tripTeam=tripTeam;
+        this.tripPlayerAddress=tripPlayerAddress;
+        this.tripAddress=tripAddress;
+        this.tripType=tripType;
+    }
+
     public Integer getTripId() {
         return tripId;
     }
@@ -170,5 +191,13 @@ public class GameTrip implements Serializable {
 
     public void setTripNote(String tripNote) {
         this.tripNote = tripNote;
+    }
+
+    public Integer getTripType() {
+        return tripType;
+    }
+
+    public void setTripType(Integer tripType) {
+        this.tripType = tripType;
     }
 }

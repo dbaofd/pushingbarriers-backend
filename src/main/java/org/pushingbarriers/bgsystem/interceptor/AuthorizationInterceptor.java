@@ -59,7 +59,10 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
                 Long diff = System.currentTimeMillis() - tokeBirthTime;
                 //log.info("token is exist : {} ms", diff);
                 //reset expire time
-                if (diff > ConstantKit.TOKEN_RESET_TIME) {
+                String type=jedis.get(adminname+"type");
+                //only admin(website) can have chance to reset token expired time
+                //but for driver(app) no need to reset token, driver token will expire in a very long time.
+                if ((diff > ConstantKit.TOKEN_RESET_TIME)&&(type.equals("admin"))) {
                     jedis.expire(adminname, ConstantKit.TOKEN_EXPIRE_TIME);
                     jedis.expire(token, ConstantKit.TOKEN_EXPIRE_TIME);
                     //log.info("Reset expire time success!");

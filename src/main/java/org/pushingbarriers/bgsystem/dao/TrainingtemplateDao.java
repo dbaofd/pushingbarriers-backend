@@ -20,6 +20,6 @@ public interface TrainingtemplateDao extends JpaRepository<Trainingtemplate,Inte
     @Transactional
     void deleteByTrainingId(Integer id);
 
-    @Query(value="select new org.pushingbarriers.bgsystem.model.Training(trainingDate, trainingDay, trainingTime, trainingPlayerId, trainingPlayer, trainingPlayerGender, trainingDriverId, trainingDriver, trainingDriverGender, trainingClub, trainingPlayerAddress, trainingAddress, trainingStatus, trainingNote) from Trainingtemplate")
+    @Query(value="select new org.pushingbarriers.bgsystem.model.Training(trainingDate, trainingDay, trainingTime, trainingPlayerId, trainingPlayer, trainingPlayerGender, trainingDriverId, trainingDriver, trainingDriverGender, trainingClub, trainingPlayerAddress, trainingAddress) from Trainingtemplate")
     List<Training> findAllTrainingTemplate();
 }

@@ -1,6 +1,7 @@
 package org.pushingbarriers.bgsystem.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import org.pushingbarriers.bgsystem.annotation.AppAPI;
 import org.pushingbarriers.bgsystem.annotation.AuthToken;
 import org.pushingbarriers.bgsystem.model.Training;
 import org.pushingbarriers.bgsystem.service.TrainingService;
@@ -46,4 +47,29 @@ public class TrainingController {
     public List<Training> getTrainingsByStatus(@PathVariable(value = "status") Integer status){
         return trainingService.findTrainingsByStatus(status);
     }
+
+    @GetMapping("/getUnconfirmedTrainingsByDriverId/{driverid}")
+    @AuthToken
+    @AppAPI
+    public List<Training> getUnconfirmedTrainingsByDriverId(@PathVariable(value = "driverid") Integer driverId){
+        return trainingService.findUnconfirmedTrainingsByDriverId(driverId);
+    }
+
+    @GetMapping("/getConfirmedTrainingsByDriverId/{driverid}")
+    @AuthToken
+    @AppAPI
+    public List<Training> getConfirmedTrainingsByDriverId(@PathVariable(value = "driverid") Integer driverId){
+        return trainingService.findConfirmedTrainingByDriverId(driverId);
+    }
+
+    @PostMapping(value="/confirmTraining")
+    @AuthToken
+    @AppAPI
+    public JSONObject confirmTraining(Integer trainingId, Integer trainingStatus, Integer trainingType, String trainingNote){
+        JSONObject result = new JSONObject();
+        trainingService.confirmTraining(trainingId,trainingStatus,trainingType, trainingNote);
+        result.put("msg","confirm training successfully");
+        return result;
+    }
+
 }

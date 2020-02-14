@@ -39,6 +39,9 @@ public class AdminController {
                     jedis.expire(token, ConstantKit.TOKEN_EXPIRE_TIME);
                     Long currentTime = System.currentTimeMillis();
                     jedis.set(token + adminName, currentTime.toString());
+                    jedis.expire(token + adminName, ConstantKit.TOKEN_EXPIRE_TIME);
+                    jedis.set(adminName+"type","admin");
+                    jedis.expire(adminName+"type", ConstantKit.TOKEN_EXPIRE_TIME);
                     //close jedis
                     redisHelper.closeJedis(jedis);
                     result.put("msg", token);

@@ -29,13 +29,13 @@ public class Training implements Serializable {
     @Column(length = 15, nullable = false, name = "trainingPlayerGender")
     private String trainingPlayerGender;
 
-    @Column(nullable = false, name = "trainingDriverId")
+    @Column(name = "trainingDriverId")
     private Integer trainingDriverId;
 
-    @Column(length = 50, nullable = false, name = "trainingDriver")
+    @Column(length = 50,  name = "trainingDriver")
     private String trainingDriver;
 
-    @Column(length = 15, nullable = false, name = "trainingDriverGender")
+    @Column(length = 15, name = "trainingDriverGender")
     private String trainingDriverGender;
 
     @Column(length = 150, nullable = false, name = "trainingClub")
@@ -53,12 +53,31 @@ public class Training implements Serializable {
     @Column(length = 500, name = "trainingNote")
     private String trainingNote;
 
+    @Column(nullable = false, name = "trainingType")
+    private Integer trainingType=1;
+
     public Training(){}
+    public Training(Date trainingDate,String trainingDay,
+                    String trainingTime,Integer trainingPlayerId,String trainingPlayer,
+                    String trainingPlayerGender, String trainingClub,String trainingPlayerAddress,
+                    String trainingAddress, Integer trainingType){
+        this.trainingDate=trainingDate;
+        this.trainingDay=trainingDay;
+        this.trainingTime=trainingTime;
+        this.trainingPlayerId=trainingPlayerId;
+        this.trainingPlayer=trainingPlayer;
+        this.trainingPlayerGender=trainingPlayerGender;
+        this.trainingClub=trainingClub;
+        this.trainingPlayerAddress=trainingPlayerAddress;
+        this.trainingAddress=trainingAddress;
+        this.trainingType=trainingType;
+    }
+
     public Training(Date trainingDate,String trainingDay,
                     String trainingTime,Integer trainingPlayerId,String trainingPlayer,
                     String trainingPlayerGender,Integer trainingDriverId,String trainingDriver,
                     String trainingDriverGender,String trainingClub,String trainingPlayerAddress,
-                    String trainingAddress, Integer trainingStatus,String trainingNote){
+                    String trainingAddress){
         this.trainingDate=trainingDate;
         this.trainingDay=trainingDay;
         this.trainingTime=trainingTime;
@@ -71,8 +90,6 @@ public class Training implements Serializable {
         this.trainingClub=trainingClub;
         this.trainingPlayerAddress=trainingPlayerAddress;
         this.trainingAddress=trainingAddress;
-        this.trainingStatus=trainingStatus;
-        this.trainingNote=trainingNote;
     }
 
     public Integer getTrainingId() {
@@ -189,5 +206,13 @@ public class Training implements Serializable {
 
     public void setTrainingDriverGender(String trainingDriverGender) {
         this.trainingDriverGender = trainingDriverGender;
+    }
+
+    public Integer getTrainingType() {
+        return trainingType;
+    }
+
+    public void setTrainingType(Integer trainingType) {
+        this.trainingType = trainingType;
     }
 }

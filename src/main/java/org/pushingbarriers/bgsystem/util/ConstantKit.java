@@ -17,7 +17,7 @@ public final class ConstantKit {
      */
     public static final Integer TOKEN_EXPIRE_TIME = 60 * 20;
 
-    public static final Integer TOKEN_EXPIRE_TIME_FOR_APP= 60*30;
+    public static final Integer TOKEN_EXPIRE_TIME_FOR_APP= 60*300;
 
     /**
      * reset token expired time limitation

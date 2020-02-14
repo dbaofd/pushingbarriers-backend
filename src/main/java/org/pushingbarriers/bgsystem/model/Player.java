@@ -38,6 +38,11 @@ public class Player implements Serializable {
     @Column(length = 15, nullable = false, name = "playerParentPhoneNum")
     private String playerParentPhoneNum;
 
+    /**
+     * 0 stands for inactive
+     * 1 stands for active
+     * 2 stands for waiting
+     */
     @Column(nullable = false, name = "playerStatus")
     private Integer playerStatus;
 

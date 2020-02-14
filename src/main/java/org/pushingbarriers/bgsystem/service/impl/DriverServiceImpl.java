@@ -80,4 +80,9 @@ public class DriverServiceImpl implements DriverService {
         driverDao.save(driver);
     }
 
+    public void updateDriverStatus(Integer driverId, Integer status){
+        Driver driver=driverDao.findDriverByDriverId(driverId);
+        driver.setDriverAvailability(status);
+        driverDao.save(driver);
+    }
 }

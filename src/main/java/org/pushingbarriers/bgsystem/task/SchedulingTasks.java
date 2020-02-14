@@ -38,7 +38,7 @@ public class SchedulingTasks {
     @Autowired
     private TripDao tripDao;
 
-    @Scheduled(cron="0 51 15 ? * MON")
+    @Scheduled(cron="0 53 22 ? * SUN")
     public void generateWeeklyTraining(){
         List<Training> trainingtemplates=trainingtemplateDao.findAllTrainingTemplate();
         for(int i=0;i<trainingtemplates.size();i++){
@@ -70,7 +70,7 @@ public class SchedulingTasks {
         System.out.println("Weekly trainings have been generated");
     }
 
-    @Scheduled(cron="0 48 22 ? * SUN")
+    @Scheduled(cron="0 48 20 ? * SUN")
     public void generateWeeklyGameTrip(){
         Date startDate=MyTools.getLastWeekSunday();
         Date endDate=MyTools.getThisWeekSunday();
