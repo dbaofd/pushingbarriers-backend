@@ -6,8 +6,10 @@ import org.pushingbarriers.bgsystem.annotation.AppAPI;
 import org.pushingbarriers.bgsystem.annotation.AuthToken;
 import org.pushingbarriers.bgsystem.dto.BasicDriver;
 import org.pushingbarriers.bgsystem.model.Driver;
+import org.pushingbarriers.bgsystem.model.InvitationCode;
 import org.pushingbarriers.bgsystem.model.Player;
 import org.pushingbarriers.bgsystem.service.DriverService;
+import org.pushingbarriers.bgsystem.service.InvitationCodeService;
 import org.pushingbarriers.bgsystem.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -30,6 +32,9 @@ import java.util.List;
 public class DriverController {
     @Autowired
     private DriverService driverService;
+
+    @Autowired
+    private InvitationCodeService invitationCodeService;
 
     @Autowired
     private MD5TokenGenerator tokenGenerator;
@@ -116,6 +121,28 @@ public class DriverController {
         Driver driver=driverService.findDriverById(driverId);
         String imgName=driver.getDriverBlueCard();
         return MyTools.exportImg(ImagePath.IMAGE_PATH_DRIVER_BLUECARD, imgName);
+    }
+
+    @PostMapping(value="/driverRegister")
+    public JSONObject driverRegister(String driverUserName, String driverPassword, String driverName,
+                                     String driverGender, Date driverBirthday, String driverPhonenum,
+                                     String driverPlateNum, String driverAddress, String driverInvitationCode){
+        JSONObject result=new JSONObject();
+        if(invitationCodeService.checkInvitationCodeExistence(driverInvitationCode)){
+            InvitationCode invitationCode=invitationCodeService.getInvitationCodeByCodeString(driverInvitationCode);
+            if(invitationCode.getCodeStatus()==1){
+                invitationCodeService.updateInvitationCodeStatus(driverInvitationCode);
+                driverService.insertNewDriver(driverUserName, driverPassword, driverName, driverGender,
+                        driverBirthday, driverPhonenum, driverPlateNum, driverAddress);
+                result.put("msg", "success");
+            }else if(invitationCode.getCodeStatus()==0){
+                result.put("msg", "invalid invitation code");
+            }
+        }else{
+            result.put("msg", "wrong invitation code");
+        }
+        return  result;
+
     }
 
     @GetMapping(value="/driverLogin/{userName}/{password}")

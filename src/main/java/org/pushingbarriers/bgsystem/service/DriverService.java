@@ -3,6 +3,7 @@ package org.pushingbarriers.bgsystem.service;
 import org.pushingbarriers.bgsystem.dto.BasicDriver;
 import org.pushingbarriers.bgsystem.model.Driver;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +25,10 @@ public interface DriverService {
     Driver getDriver(String driverUserName);
 
     Driver findDriverById(Integer driverId);
+
+    void insertNewDriver(String driverUserName, String driverPassword, String driverName,
+                           String driverGender, Date driverBirthday, String driverPhonenum,
+                           String driverPlateNum, String driverAddress);
 
     void updateDriverInfo(Integer driverId, String driverPhoneNum, String driverPlateNum, String driverAddress);
 

@@ -7,6 +7,7 @@ import org.pushingbarriers.bgsystem.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,6 +58,21 @@ public class DriverServiceImpl implements DriverService {
         return driverDao.findDriverByDriverId(driverId);
     }
 
+    @Override
+    public void insertNewDriver(String driverUserName, String driverPassword, String driverName,
+                                  String driverGender, Date driverBirthday, String driverPhonenum,
+                                  String driverPlateNum, String driverAddress){
+        Driver driver=new Driver();
+        driver.setDriverUserName(driverUserName);
+        driver.setDriverPassword(driverPassword);
+        driver.setDriverName(driverName);
+        driver.setDriverGender(driverGender);
+        driver.setDriverBirthday(driverBirthday);
+        driver.setDriverPhoneNum(driverPhonenum);
+        driver.setDriverPlateNum(driverPlateNum);
+        driver.setDriverAddress(driverAddress);
+        driverDao.save(driver);
+    }
     @Override
     public void updateDriverInfo(Integer driverId, String driverPhoneNum, String driverPlateNum, String driverAddress){
         Driver driver=driverDao.findDriverByDriverId(driverId);

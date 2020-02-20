@@ -16,8 +16,9 @@ public class BgsystemApplicationTests {
 
     @Test
     public void dateUtilTest(){
-        System.out.println("jieguo**********************");
-        System.out.println(MyTools.getLastWeekSunday()+" "+MyTools.getThisWeekSunday()+" "+MyTools.getNextWeekSunday());
+        for(int i=0;i<20;i++) {
+            System.out.println(MyTools.generateInvitationCode());
+        }
     }
 
 

@@ -1,7 +1,6 @@
 package org.pushingbarriers.bgsystem.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
 import org.pushingbarriers.bgsystem.annotation.AuthToken;
 import org.pushingbarriers.bgsystem.model.Player;
 import org.pushingbarriers.bgsystem.service.PlayerService;
@@ -9,15 +8,10 @@ import org.pushingbarriers.bgsystem.util.ImagePath;
 import org.pushingbarriers.bgsystem.util.MyTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.xml.ws.Response;
 import java.io.*;
 import java.util.Date;
 import java.util.List;

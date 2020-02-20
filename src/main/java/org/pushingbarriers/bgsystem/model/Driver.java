@@ -45,7 +45,7 @@ public class Driver implements Serializable {
      * 2 stands for Permanently Unavailable
      */
     @Column(nullable = false, name = "driverAvailability")
-    private Integer driverAvailability;
+    private Integer driverAvailability=1;
 
     @Column(length = 200, name = "driverLicense")
     @JsonIgnore

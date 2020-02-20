@@ -169,6 +169,8 @@ public class MyTools {
                 return ResponseEntity.ok().headers(headers).contentLength(file.length()).contentType(MediaType.parseMediaType("application/octet-stream")).body(new FileSystemResource(file));
 
             }
+            return null;
+
         }
         return null;
     }
@@ -208,5 +210,18 @@ public class MyTools {
         } else {
             System.out.println(imgPath+imgName + " doesn't exist!！");
         }
+    }
+
+    public static String generateInvitationCode(){
+        final Integer invitationCodeLength=20;
+        String generateSource = "23456789abcdefghjklmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";//remove 1,i,I,0,o,O
+        String rtnStr = "";
+        for (int i = 0; i < invitationCodeLength; i++) {
+            //every time randomly pick a character from the generateSource in for circulation.
+            String nowStr = String.valueOf(generateSource.charAt((int) Math.floor(Math.random() * generateSource.length())));
+            rtnStr += nowStr;
+            generateSource = generateSource.replaceAll(nowStr, "");
+        }
+        return rtnStr;
     }
 }
