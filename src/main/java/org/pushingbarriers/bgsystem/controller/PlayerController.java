@@ -35,9 +35,12 @@ public class PlayerController {
     @PostMapping(value="/updatePlayerInfoWithoutPhoto")
     @AuthToken
     public JSONObject updatePlayerInfoWithoutPhoto(String name, String gender, String phoneNum, Date birthday,
-                                       String parentName, String parentPhoneNum, String address, Integer status, Integer id, Integer[] teams){
+                                                   String parentName, String parentPhoneNum, String address,
+                                                   String referralPerspon, Integer status, Integer id,
+                                                   Integer[] teams, String school, String consent,
+                                                   String coachManager, String visa, String note, String sport){
         String fileName=null;
-        playerService.updatePlayerInfo(name,gender,phoneNum,birthday,parentName,parentPhoneNum,address,status, id,teams, fileName);
+        playerService.updatePlayerInfo(name,gender,phoneNum,birthday,parentName,parentPhoneNum,address,referralPerspon,status, id,teams, fileName, school,consent,coachManager,visa,note, sport);
         JSONObject result = new JSONObject();
         result.put("msg","update player info successfully");
         return result;
@@ -45,8 +48,11 @@ public class PlayerController {
 
     @PostMapping(value="/updatePlayerInfo")
     @AuthToken
-    public JSONObject updatePlayerInfo(@RequestParam("photo") MultipartFile photo, String name, String gender, String phoneNum, Date birthday,
-                                       String parentName, String parentPhoneNum, String address, Integer status, Integer id, Integer[] teams){
+    public JSONObject updatePlayerInfo(@RequestParam("photo") MultipartFile photo, String name, String gender,
+                                       String phoneNum, Date birthday,String parentName, String parentPhoneNum,
+                                       String address, String referralPerspon, Integer status, Integer id,
+                                       Integer[] teams,  String school, String consent,
+                                       String coachManager, String visa, String note, String sport){
         String prefix=photo.getOriginalFilename().substring(photo.getOriginalFilename().lastIndexOf(".")+1);//获取后缀名
         String fileName=name+System.currentTimeMillis()+"."+prefix;
 
@@ -57,7 +63,7 @@ public class PlayerController {
         }
 
         MyTools.saveImg(photo,ImagePath.IMAGE_PATH_PLAYER_PHOTO,fileName);
-        playerService.updatePlayerInfo(name,gender,phoneNum,birthday,parentName,parentPhoneNum,address,status, id,teams, fileName);
+        playerService.updatePlayerInfo(name,gender,phoneNum,birthday,parentName,parentPhoneNum,address,referralPerspon,status, id,teams, fileName, school,consent,coachManager,visa,note, sport);
         JSONObject result = new JSONObject();
         result.put("msg","update player info successfully");
         return result;
@@ -80,13 +86,19 @@ public class PlayerController {
 
     @PostMapping(value="/insertNewPlayer")
     @AuthToken
-    public JSONObject insertNewPlayer(@RequestParam("playerPhoto") MultipartFile playerPhoto, String playerName, String playerGender, String playerPhoneNum, Date playerBirthDay,
-                                      String playerParentName, String playerParentPhoneNum, String playerAddress, Integer playerStatus, Integer[] teamList){
+    public JSONObject insertNewPlayer(@RequestParam("playerPhoto") MultipartFile playerPhoto, String playerName,
+                                      String playerGender, String playerPhoneNum, Date playerBirthDay,
+                                      String playerParentName, String playerParentPhoneNum, String playerAddress,
+                                      Integer playerStatus, Integer[] teamList, String playerReferralPerspon, String playerSchool, String playerConsent,
+                                      String playerCoachManager, String playerVisa, String playerNote, String playerSport){
         //playerService.insertNewPlayer(playerName,playerGender,playerPhoneNum,playerBirthDay,playerParentName,playerParentPhoneNum,playerAddress);
         String prefix=playerPhoto.getOriginalFilename().substring(playerPhoto.getOriginalFilename().lastIndexOf(".")+1);//获取后缀名
         String fileName=playerName+System.currentTimeMillis()+"."+prefix;
         MyTools.saveImg(playerPhoto,ImagePath.IMAGE_PATH_PLAYER_PHOTO,fileName);
-        playerService.saveNewPlayer(playerName,playerGender,playerPhoneNum,playerBirthDay,playerParentName,playerParentPhoneNum,playerAddress,playerStatus,teamList, fileName);
+        playerService.saveNewPlayer(playerName,playerGender,playerPhoneNum,
+                playerBirthDay,playerParentName,playerParentPhoneNum,
+                playerAddress,playerStatus,teamList, fileName,
+                playerReferralPerspon,playerSchool,playerConsent,playerCoachManager,playerVisa,playerNote, playerSport);
         JSONObject result = new JSONObject();
         result.put("msg","insert new player successfully");
         return result;

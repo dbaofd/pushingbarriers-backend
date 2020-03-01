@@ -16,4 +16,6 @@ public interface InvitationCodeDao extends JpaRepository<InvitationCode, Integer
     Boolean existsByCodeString(String codeString);
 
     List<InvitationCode> findInvitationCodesByCodeName(String codeName);
+
+    List<InvitationCode> findInvitationCodesByCodeNameContaining(String codeName);
 }

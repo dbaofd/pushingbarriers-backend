@@ -8,16 +8,16 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-public class BgsystemApplication{
+public class BgsystemApplication extends SpringBootServletInitializer{//extends SpringBootServletInitializer
 
     public static void main(String[] args) {
         SpringApplication.run(BgsystemApplication.class, args);
     }
 
-//    @Override
-//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//        return application.sources(BgsystemApplication.class);
-//    }
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(BgsystemApplication.class);
+    }
 
 }
 

@@ -18,11 +18,19 @@ public class TeamServiceImpl implements TeamService {
     private TeamDao teamDao;
 
     public List<Team> getAllPlayerTeamMapping(){
-        return teamDao.findAll();
+        return teamDao.findTeamsByTeamStatus(1);
     }
 
     public List<BasicTeam> findAllTeams() {
-        return teamDao.findTeams();
+        return teamDao.findBasicTeams();
+    }
+
+    public List<BasicTeam> findTeamsByTeamNameContaining(String teamName){
+        return teamDao.findBasicTeamsByTeamNameContaining(teamName);
+    }
+
+    public List<BasicTeam> findTeamsByStatus(Integer status){
+        return teamDao.findBasicTeamsByStatus(status);
     }
 
     public List<Team> findTeamByName(String name){
@@ -31,5 +39,32 @@ public class TeamServiceImpl implements TeamService {
 
     public List<Team> findTeamsByClubName(String name){
         return teamDao.findTeamsByClubName(name);
+    }
+
+    public void insertNewTeam(String teamName, String teamClub, String teamClubAddress,
+                              String teamCoachName, String teamCoachPhoneNum, String teamManagerName, String teamManagerPhoneNum){
+        Team team=new Team();
+        team.setTeamName(teamName);
+        team.setClubName(teamClub);
+        team.setClubAddress(teamClubAddress);
+        team.setTeamCoachName(teamCoachName);
+        team.setTeamCoachPhoneNum(teamCoachPhoneNum);
+        team.setTeamManagerName(teamManagerName);
+        team.setTeamManagerPhoneNum(teamManagerPhoneNum);
+        teamDao.save(team);
+    }
+
+    public void updateTeamInfo(Integer teamId, String teamName, String teamClub, String teamClubAddress, Integer teamStatus,
+                               String teamCoachName, String teamCoachPhoneNum, String teamManagerName, String teamManagerPhoneNum){
+        Team team=teamDao.getTeamByTeamId(teamId);
+        team.setTeamName(teamName);
+        team.setClubName(teamClub);
+        team.setClubAddress(teamClubAddress);
+        team.setTeamStatus(teamStatus);
+        team.setTeamCoachName(teamCoachName);
+        team.setTeamCoachPhoneNum(teamCoachPhoneNum);
+        team.setTeamManagerName(teamManagerName);
+        team.setTeamManagerPhoneNum(teamManagerPhoneNum);
+        teamDao.save(team);
     }
 }

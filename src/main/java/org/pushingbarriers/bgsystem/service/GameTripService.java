@@ -12,6 +12,8 @@ public interface GameTripService {
 
     List<GameTrip> getGameTripsByStatus(Integer status);
 
+    void updateGameTripStatus(String note, Integer status, Integer id);
+
     List<GameTrip> getGameTripsForDriver(String driverGender);
 
     List<GameTrip> getConfirmedGamesByDriverId(Integer driverId);

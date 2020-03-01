@@ -18,6 +18,10 @@ public interface DriverService {
 
     List<Driver> findDriversByDriverAvailability(Integer driverAvailability);
 
+    List<Driver> findFreeDriversForTraining();
+
+    List<Driver> findFreeDriversForGame();
+
     void resetDriverPassword(String password, Integer id);
 
     Boolean driverExistence(String driverUserName);
@@ -30,7 +34,11 @@ public interface DriverService {
                            String driverGender, Date driverBirthday, String driverPhonenum,
                            String driverPlateNum, String driverAddress);
 
-    void updateDriverInfo(Integer driverId, String driverPhoneNum, String driverPlateNum, String driverAddress);
+    void updateAllDriverInfo(Integer driverId,String driverName, String driverGender,
+                             Date driverBirthday, String driverPhoneNum, String driverPlateNum,
+                             String driverAddress, String driverEmail, Date driverStartDate,
+                             Date driverEndDate, Integer driverSeatCapacity, String driverNote);
+    void updateSomeDriverInfo(Integer driverId, String driverPhoneNum, String driverPlateNum, String driverAddress);
 
     void updateDriverLicense(Integer driverId, String driverLicense);
 

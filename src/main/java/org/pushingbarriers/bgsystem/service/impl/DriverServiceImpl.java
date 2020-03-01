@@ -38,6 +38,14 @@ public class DriverServiceImpl implements DriverService {
         return driverDao.findDriversByDriverAvailability(driverAvailability);
     }
 
+    public List<Driver> findFreeDriversForTraining(){
+        return driverDao.findFreeDriversForTraining();
+    }
+
+    public List<Driver> findFreeDriversForGame(){
+        return driverDao.findFreeDriversForGame();
+    }
+
     @Override
     public void resetDriverPassword(String password, Integer id){
         driverDao.resetDriverPassword(password,id);
@@ -73,8 +81,27 @@ public class DriverServiceImpl implements DriverService {
         driver.setDriverAddress(driverAddress);
         driverDao.save(driver);
     }
+
+    public void updateAllDriverInfo(Integer driverId,String driverName, String driverGender,
+                             Date driverBirthday, String driverPhoneNum, String driverPlateNum,
+                             String driverAddress, String driverEmail, Date driverStartDate,
+                             Date driverEndDate, Integer driverSeatCapacity, String driverNote){
+        Driver driver=driverDao.findDriverByDriverId(driverId);
+        driver.setDriverName(driverName);
+        driver.setDriverGender(driverGender);
+        driver.setDriverBirthday(driverBirthday);
+        driver.setDriverPhoneNum(driverPhoneNum);
+        driver.setDriverPlateNum(driverPlateNum);
+        driver.setDriverAddress(driverAddress);
+        driver.setDriverEmail(driverEmail);
+        driver.setDriverStartDate(driverStartDate);
+        driver.setDriverEndDate(driverEndDate);
+        driver.setDriverSeatCapacity(driverSeatCapacity);
+        driver.setDriverNote(driverNote);
+        driverDao.save(driver);
+    }
     @Override
-    public void updateDriverInfo(Integer driverId, String driverPhoneNum, String driverPlateNum, String driverAddress){
+    public void updateSomeDriverInfo(Integer driverId, String driverPhoneNum, String driverPlateNum, String driverAddress){
         Driver driver=driverDao.findDriverByDriverId(driverId);
         driver.setDriverPhoneNum(driverPhoneNum);
         driver.setDriverPlateNum(driverPlateNum);

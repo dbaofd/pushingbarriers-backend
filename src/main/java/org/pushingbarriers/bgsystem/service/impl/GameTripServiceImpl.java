@@ -24,6 +24,12 @@ public class GameTripServiceImpl implements GameTripService {
         return gameTripDao.findGameTripsByTripStatus(status);
     }
 
+    public void updateGameTripStatus(String note, Integer status, Integer id){
+        GameTrip gameTrip=gameTripDao.getOne(id);
+        gameTrip.setTripNote(note);
+        gameTrip.setTripStatus(status);
+        gameTripDao.save(gameTrip);
+    }
     public List<GameTrip> getGameTripsForDriver(String driverGender){
         if(driverGender.equals("Male")){
             return gameTripDao.findGameTripsForMaleDriver(driverGender);

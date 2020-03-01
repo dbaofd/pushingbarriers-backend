@@ -27,17 +27,32 @@ public class Driver implements Serializable {
     //When check driver info, no need to return password, json will ignore it.
     private String driverPassword;
 
-    @Column(length = 15, nullable = false, name = "driverPhoneNum")
+    @Column(length = 15,name = "driverPhoneNum")
     private String driverPhoneNum;
 
-    @Column(length = 20, nullable = false, name = "driverPlateNum")
+    @Column(length = 20,  name = "driverPlateNum")
     private String driverPlateNum;
 
-    @Column(nullable = false, name = "driverBirthday")
+    @Column(name = "driverBirthday")
     private Date driverBirthday;
 
-    @Column(length = 170, nullable = false, name = "driverAddress")
+    @Column(length = 170, name = "driverAddress")
     private String driverAddress;
+
+    @Column(name = "driverSeatCapacity")
+    private Integer driverSeatCapacity;
+
+    @Column(length = 100, name = "driverEmail")
+    private String driverEmail;
+
+    @Column(name = "driverStartDate")
+    private Date driverStartDate;
+
+    @Column(name = "driverEndDate")
+    private Date driverEndDate;
+
+    @Column(length = 500, name = "driverNote")
+    private String driverNote;
 
     /**
      * 0 stands for Temporarily Unavailable
@@ -145,5 +160,45 @@ public class Driver implements Serializable {
 
     public void setDriverBlueCard(String driverBlueCard) {
         this.driverBlueCard = driverBlueCard;
+    }
+
+    public Integer getDriverSeatCapacity() {
+        return driverSeatCapacity;
+    }
+
+    public void setDriverSeatCapacity(Integer driverSeatCapacity) {
+        this.driverSeatCapacity = driverSeatCapacity;
+    }
+
+    public String getDriverEmail() {
+        return driverEmail;
+    }
+
+    public void setDriverEmail(String driverEmail) {
+        this.driverEmail = driverEmail;
+    }
+
+    public Date getDriverStartDate() {
+        return driverStartDate;
+    }
+
+    public void setDriverStartDate(Date driverStartDate) {
+        this.driverStartDate = driverStartDate;
+    }
+
+    public Date getDriverEndDate() {
+        return driverEndDate;
+    }
+
+    public void setDriverEndDate(Date driverEndDate) {
+        this.driverEndDate = driverEndDate;
+    }
+
+    public String getDriverNote() {
+        return driverNote;
+    }
+
+    public void setDriverNote(String driverNote) {
+        this.driverNote = driverNote;
     }
 }

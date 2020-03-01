@@ -123,7 +123,35 @@ public class DriverController {
         return MyTools.exportImg(ImagePath.IMAGE_PATH_DRIVER_BLUECARD, imgName);
     }
 
+    @GetMapping(value = "/findFreeDriversForTraining")
+    @AuthToken
+    public List<Driver> findFreeDriversForTraining(){
+        return driverService.findFreeDriversForTraining();
+    }
+
+    @GetMapping(value = "/findFreeDriversForGame")
+    @AuthToken
+    public List<Driver> findFreeDriversForGame(){
+        return driverService.findFreeDriversForGame();
+    }
+
+    @PostMapping(value="/updateAllDriverInfo")
+    @AuthToken
+    public JSONObject updateAllDriverInfo(Integer driverId,String driverName, String driverGender,
+                                    Date driverBirthday, String driverPhoneNum, String driverPlateNum,
+                                    String driverAddress, String driverEmail, Date driverStartDate,
+                                    Date driverEndDate, Integer driverSeatCapacity, String driverNote){
+        driverService.updateAllDriverInfo(driverId, driverName, driverGender,
+                                        driverBirthday, driverPhoneNum, driverPlateNum,
+                                        driverAddress, driverEmail, driverStartDate,
+                                        driverEndDate, driverSeatCapacity, driverNote);
+        JSONObject result=new JSONObject();
+        result.put("msg", "update driver info successfully!");
+        return  result;
+    }
+
     @PostMapping(value="/driverRegister")
+    @AppAPI
     public JSONObject driverRegister(String driverUserName, String driverPassword, String driverName,
                                      String driverGender, Date driverBirthday, String driverPhonenum,
                                      String driverPlateNum, String driverAddress, String driverInvitationCode){
@@ -188,11 +216,11 @@ public class DriverController {
         return result;
     }
 
-    @PostMapping(value="/updateDriverInfo")
+    @PostMapping(value="/updateSomeDriverInfo")
     @AuthToken
     @AppAPI
-    public JSONObject updateDriverInfo(Integer driverId, String driverPhoneNum, String driverPlateNum, String driverAddress){
-        driverService.updateDriverInfo(driverId, driverPhoneNum, driverPlateNum, driverAddress);
+    public JSONObject updateSomeDriverInfo(Integer driverId, String driverPhoneNum, String driverPlateNum, String driverAddress){
+        driverService.updateSomeDriverInfo(driverId, driverPhoneNum, driverPlateNum, driverAddress);
         JSONObject result=new JSONObject();
         result.put("msg", "Update profile successfully");
         return result;

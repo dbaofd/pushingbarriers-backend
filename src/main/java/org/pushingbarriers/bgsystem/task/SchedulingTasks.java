@@ -70,7 +70,7 @@ public class SchedulingTasks {
         System.out.println("Weekly trainings have been generated");
     }
 
-    @Scheduled(cron="0 19 02 ? * WED")
+    @Scheduled(cron="0 19 02 ? * MON")
     public void generateWeeklyGameTrip(){
         Date startDate=MyTools.getLastWeekSunday();
         Date endDate=MyTools.getThisWeekSunday();

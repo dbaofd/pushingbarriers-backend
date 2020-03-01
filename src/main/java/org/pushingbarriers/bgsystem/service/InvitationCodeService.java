@@ -17,4 +17,8 @@ public interface InvitationCodeService {
     List<InvitationCode> getInvitationCodesByCodeName(String codeName);
 
     void updateInvitationCodeStatus(String codeString);
+
+    List<InvitationCode> findAllInvitationCode();
+
+    List<InvitationCode> getInvitationCodeByCodeNameContaining(String codeName);
 }

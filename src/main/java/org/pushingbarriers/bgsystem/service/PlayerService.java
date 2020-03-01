@@ -13,7 +13,10 @@ public interface PlayerService {
     List<Player> findAllPlayers();
 
     void updatePlayerInfo(String name, String gender, String phoneNum, Date birthday,
-                                     String parentName, String parentPhoneNum, String address, Integer status, Integer id, Integer[] teamArray, String photo);
+                          String parentName, String parentPhoneNum, String address,
+                          String referralPerspon, Integer status, Integer id,
+                          Integer[] teamArray, String photo, String school, String consent,
+                          String coachManager, String visa, String note, String sport );
 
     List<Player> findPlayersByPlayerName(String playerName);
 
@@ -22,7 +25,10 @@ public interface PlayerService {
     List<Player> findPlayersByPlayerStatus(Integer status);
 
     void saveNewPlayer(String playerName, String playerGender, String playerPhoneNum, Date playerBirthDay,
-                                String playerParentName, String playerParentPhoneNum, String playerAddress,Integer playerStatus, Integer[] playerTeams, String playerPhoto);
+                       String playerParentName, String playerParentPhoneNum, String playerAddress,
+                       Integer playerStatus, Integer[] playerTeams, String playerPhoto,
+                       String playerReferralPerspon, String playerSchool, String playerConsent,
+                       String playerCoachManager, String playerVisa, String playerNote, String sport);
 
     Player findPlayerByPlayerId(Integer playerId);
 }

@@ -23,19 +23,19 @@ public class Player implements Serializable {
     @Column(length = 15, nullable = false, name = "playerGender")
     private String playerGender;
 
-    @Column(length = 15, nullable = false, name = "playerPhoneNum")
+    @Column(length = 15,  name = "playerPhoneNum")
     private String playerPhoneNum;
 
-    @Column(nullable = false, name = "playerBirthday")
+    @Column(name = "playerBirthday")
     private Date playerBirthday;
 
     @Column(length = 170, nullable = false, name = "playerAddress")
     private String playerAddress;
 
-    @Column(length = 100, nullable = false, name = "playerParentName")
+    @Column(length = 100, name = "playerParentName")
     private String playerParentName;
 
-    @Column(length = 15, nullable = false, name = "playerParentPhoneNum")
+    @Column(length = 50,  name = "playerParentPhoneNum")
     private String playerParentPhoneNum;
 
     /**
@@ -46,9 +46,30 @@ public class Player implements Serializable {
     @Column(nullable = false, name = "playerStatus")
     private Integer playerStatus;
 
-    @Column(length = 200, nullable = false, name = "playerPhoto")
+    @Column(length = 200, name = "playerPhoto")
     @JsonIgnore
     private String playerPhoto;
+
+    @Column(length = 100, name = "playerReferralPerspon")
+    private String playerReferralPerspon;
+
+    @Column(length = 60, name = "playerSchool")
+    private  String playerSchool;
+
+    @Column(length = 60, name = "playerSport")
+    private String playerSport;
+
+    @Column(length = 30, name = "playerConsent")
+    private  String playerConsent;
+
+    @Column(length = 100, name = "playerCoachManager")
+    private  String playerCoachManager;
+
+    @Column(length = 100, name = "playerVisa")
+    private  String playerVisa;
+
+    @Column(length = 500, name = "playerNote")
+    private  String playerNote;
     //The Exception:Failed to write HTTP message: org.springframework.http.converter.HttpMessageNotWritableException:
     //The fix is to get Jackson to be able to handle bi-directional references.
     //And this is done by using two Annotations: @JsonManagedReference and @JsonBackReference.
@@ -141,5 +162,61 @@ public class Player implements Serializable {
 
     public void setPlayerPhoto(String playerPhoto) {
         this.playerPhoto = playerPhoto;
+    }
+
+    public String getPlayerReferralPerspon() {
+        return playerReferralPerspon;
+    }
+
+    public void setPlayerReferralPerspon(String playerReferralPerspon) {
+        this.playerReferralPerspon = playerReferralPerspon;
+    }
+
+    public String getPlayerSchool() {
+        return playerSchool;
+    }
+
+    public void setPlayerSchool(String playerSchool) {
+        this.playerSchool = playerSchool;
+    }
+
+    public String getPlayerConsent() {
+        return playerConsent;
+    }
+
+    public void setPlayerConsent(String playerConsent) {
+        this.playerConsent = playerConsent;
+    }
+
+    public String getPlayerCoachManager() {
+        return playerCoachManager;
+    }
+
+    public void setPlayerCoachManager(String playerCoachManager) {
+        this.playerCoachManager = playerCoachManager;
+    }
+
+    public String getPlayerVisa() {
+        return playerVisa;
+    }
+
+    public void setPlayerVisa(String playerVisa) {
+        this.playerVisa = playerVisa;
+    }
+
+    public String getPlayerNote() {
+        return playerNote;
+    }
+
+    public void setPlayerNote(String playerNote) {
+        this.playerNote = playerNote;
+    }
+
+    public String getPlayerSport() {
+        return playerSport;
+    }
+
+    public void setPlayerSport(String playerSport) {
+        this.playerSport = playerSport;
     }
 }

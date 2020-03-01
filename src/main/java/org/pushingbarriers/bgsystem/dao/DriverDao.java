@@ -35,4 +35,11 @@ public interface DriverDao extends JpaRepository<Driver,Integer> {
     Driver findDriverByDriverUserName(String driverUserName);
 
     Driver findDriverByDriverId(Integer id);
+
+    @Query("select d from Driver d where d.driverId not in (select t.trainingDriverId from Training t where t.trainingDriverId is not null)")
+    List<Driver> findFreeDriversForTraining();
+
+    //when use 'not in', make sure both right side and left side has no null value
+    @Query("select d from Driver d where d.driverId not in (select g.tripDriverId from GameTrip g where g.tripDriverId is not null )")
+    List<Driver> findFreeDriversForGame();
 }

@@ -29,7 +29,10 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     public void updatePlayerInfo(String name, String gender, String phoneNum, Date birthday,
-                                     String parentName, String parentPhoneNum, String address,Integer status, Integer id, Integer[] teams, String photo){
+                                 String parentName, String parentPhoneNum, String address,
+                                 String referralPerspon, Integer status, Integer id,
+                                 Integer[] teams, String photo, String school, String consent,
+                                 String coachManager, String visa, String note, String sport) {
         Player player=playerDao.findById(id).get();
         player.setPlayerName(name);
         player.setPlayerGender(gender);
@@ -39,6 +42,13 @@ public class PlayerServiceImpl implements PlayerService {
         player.setPlayerParentPhoneNum(parentPhoneNum);
         player.setPlayerAddress(address);
         player.setPlayerStatus(status);
+        player.setPlayerReferralPerspon(referralPerspon);
+        player.setPlayerSchool(school);
+        player.setPlayerConsent(consent);
+        player.setPlayerCoachManager(coachManager);
+        player.setPlayerVisa(visa);
+        player.setPlayerNote(note);
+        player.setPlayerSport(sport);
         if(photo!=null){
             player.setPlayerPhoto(photo);
         }
@@ -67,7 +77,10 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     public void saveNewPlayer(String playerName, String playerGender, String playerPhoneNum, Date playerBirthDay,
-                              String playerParentName, String playerParentPhoneNum, String playerAddress, Integer playerStatus, Integer[] playerTeams, String playerPhoto){
+                              String playerParentName, String playerParentPhoneNum, String playerAddress,
+                              Integer playerStatus, Integer[] playerTeams, String playerPhoto,
+                              String playerReferralPerspon, String playerSchool, String playerConsent,
+                              String playerCoachManager, String playerVisa, String playerNote, String playerSport){
         List<Team> teamList=new ArrayList<>();
         for(int i=0;i<playerTeams.length;i++){
             Team team=teamDao.findById(playerTeams[i]).get();
@@ -84,6 +97,13 @@ public class PlayerServiceImpl implements PlayerService {
         player.setPlayerAddress(playerAddress);
         player.setPlayerStatus(playerStatus);
         player.setPlayerPhoto(playerPhoto);
+        player.setPlayerReferralPerspon(playerReferralPerspon);
+        player.setPlayerSchool(playerSchool);
+        player.setPlayerConsent(playerConsent);
+        player.setPlayerCoachManager(playerCoachManager);
+        player.setPlayerVisa(playerVisa);
+        player.setPlayerNote(playerNote);
+        player.setPlayerSport(playerSport);
         playerDao.save(player);
     }
 

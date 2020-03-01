@@ -33,6 +33,15 @@ public class GameTripController {
         return gameTripService.getGameTripsByStatus(status);
     }
 
+    @PostMapping(value="/updateGameTripStatus")
+    @AuthToken
+    public JSONObject updateGameTripStatus(String tripNote, Integer tripStatus, Integer tripId){
+        gameTripService.updateGameTripStatus(tripNote,tripStatus,tripId);
+        JSONObject result = new JSONObject();
+        result.put("msg","update gameTrip status successfully");
+        return result;
+    }
+
     @GetMapping("/getGameTripsForDriver/{drivergender}")
     @AuthToken
     @AppAPI

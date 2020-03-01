@@ -40,4 +40,12 @@ public class InvitationCodeServiceImpl implements InvitationCodeService {
         invitationCode.setCodeStatus(0);
         invitationCodeDao.save(invitationCode);
     }
+
+    public List<InvitationCode> findAllInvitationCode(){
+        return invitationCodeDao.findAll();
+    }
+
+    public List<InvitationCode> getInvitationCodeByCodeNameContaining(String codeName){
+        return invitationCodeDao.findInvitationCodesByCodeNameContaining(codeName);
+    }
 }
