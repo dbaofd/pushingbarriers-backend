@@ -1,3 +1,4 @@
 1. Change redis password
 2. Change mysql password
 3. Change mainApplication code
+4. Image path

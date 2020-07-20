@@ -120,6 +120,7 @@ public class DriverController {
     public ResponseEntity<FileSystemResource> downloadDriverBluecard(@PathVariable("driverId") Integer driverId) throws FileNotFoundException {
         Driver driver=driverService.findDriverById(driverId);
         String imgName=driver.getDriverBlueCard();
+        System.out.println();
         return MyTools.exportImg(ImagePath.IMAGE_PATH_DRIVER_BLUECARD, imgName);
     }
 

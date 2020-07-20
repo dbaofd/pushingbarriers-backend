@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.io.*;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -38,7 +40,7 @@ public class SchedulingTasks {
     @Autowired
     private TripDao tripDao;
 
-    @Scheduled(cron="0 01 02 ? * SAT")
+    @Scheduled(cron="0 25 02 ? * SAT")
     public void generateWeeklyTraining(){
         List<Training> trainingtemplates=trainingtemplateDao.findAllTrainingTemplate();
         for(int i=0;i<trainingtemplates.size();i++){
@@ -55,7 +57,11 @@ public class SchedulingTasks {
             }
         }
         List<Trip> tripsFromTraining=trainingDao.findAllTrainings();
-        tripDao.saveAll(tripsFromTraining);//before truncating the training table, insert all the trainings into trip table
+        if(tripsFromTraining.size()>0) {
+            tripDao.saveAll(tripsFromTraining);//before truncating the training table, insert all the trainings into trip table
+        }else{
+            System.out.println("No training trip this week.");
+        }
         if(updatetimeDao.existsGameUpdateTimeByGameupdatetimeId(2)){
             GameUpdateTime gameUpdateTime=updatetimeDao.findGameUpdateTimeByGameupdatetimeId(2);
             gameUpdateTime.setGameupdatetimeDate(new Date());
@@ -70,7 +76,7 @@ public class SchedulingTasks {
         System.out.println("Weekly trainings have been generated");
     }
 
-    @Scheduled(cron="0 19 02 ? * MON")
+    @Scheduled(cron="0 30 16 ? * THU")
     public void generateWeeklyGameTrip(){
         Date startDate=MyTools.getLastWeekSunday();
         Date endDate=MyTools.getThisWeekSunday();
@@ -90,27 +96,35 @@ public class SchedulingTasks {
         for(i=0;i<games.size();i++){
             teamId=games.get(i).getGameTeamId();
             //System.out.println("*********************************");
-            for(j=0;j<teamsMap.get(teamId).getPlayerList().size();j++) {
-                Player player = teamsMap.get(teamId).getPlayerList().get(j);
+            if(teamsMap.containsKey(teamId)) {
+                for (j = 0; j < teamsMap.get(teamId).getPlayerList().size(); j++) {
+                    Player player = teamsMap.get(teamId).getPlayerList().get(j);
 //                System.out.println(games.get(i).getGameDate()+" "+dateFm.format(games.get(i).getGameDate())+" "
 //                +games.get(i).getGameTime()+" "+games.get(i).getGameTeam()+" "+games.get(i).getGameAddress()+
 //                " "+player.getPlayerName()+ " "+player.getPlayerId()+" "+player.getPlayerGender()+" "+player.getPlayerAddress());
-                GameTrip gameTrip = new GameTrip();
-                gameTrip.setTripDate(games.get(i).getGameDate());
-                gameTrip.setTripDay(dateFm.format(games.get(i).getGameDate()));
-                gameTrip.setTripTime(games.get(i).getGameTime());
-                gameTrip.setTripTeam(games.get(i).getGameTeam());
-                gameTrip.setTripAddress(games.get(i).getGameAddress());
+                    GameTrip gameTrip = new GameTrip();
+                    gameTrip.setTripDate(games.get(i).getGameDate());
+                    gameTrip.setTripDay(dateFm.format(games.get(i).getGameDate()));
+                    gameTrip.setTripTime(games.get(i).getGameTime());
+                    gameTrip.setTripTeam(games.get(i).getGameTeam());
+                    gameTrip.setTripAddress(games.get(i).getGameAddress());
 
-                gameTrip.setTripPlayer(player.getPlayerName());
-                gameTrip.setTripPlayerId(player.getPlayerId());
-                gameTrip.setTripPlayerGender(player.getPlayerGender());
-                gameTrip.setTripPlayerAddress(player.getPlayerAddress());
-                gameTripList.add(gameTrip);
+                    gameTrip.setTripPlayer(player.getPlayerName());
+                    gameTrip.setTripPlayerId(player.getPlayerId());
+                    gameTrip.setTripPlayerGender(player.getPlayerGender());
+                    gameTrip.setTripPlayerAddress(player.getPlayerAddress());
+                    gameTripList.add(gameTrip);
+                }
+            }else{
+                System.out.println("Can't find the team with "+teamId+" id!");
             }
         }
         List<Trip> tripsFromGameTrip=gameTripDao.findAllGameTrips();
-        tripDao.saveAll(tripsFromGameTrip);
+        if(tripsFromGameTrip.size()>0) {
+            tripDao.saveAll(tripsFromGameTrip);
+        }else{
+            System.out.println("No game trip this week");
+        }
         if(updatetimeDao.existsGameUpdateTimeByGameupdatetimeId(2)){
             GameUpdateTime gameUpdateTime=updatetimeDao.findGameUpdateTimeByGameupdatetimeId(2);
             gameUpdateTime.setGameupdatetimeDate(new Date());
@@ -123,6 +137,26 @@ public class SchedulingTasks {
         gameTripDao.truncateMyTable();
         gameTripDao.saveAll(gameTripList);
         System.out.println("Weekly game trips have been generated");
+    }
+
+    @Scheduled(cron="0 18 02 ? * WED")
+    public void grapGameScheduleByPython(){
+        Process proc;
+        try {
+            proc = Runtime.getRuntime().exec("python3 /usr/local/python-demo/startup.py");
+            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+            String line = null;
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
+            in.close();
+            proc.waitFor();
+            System.out.println("Successfully executed python web crawler!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 

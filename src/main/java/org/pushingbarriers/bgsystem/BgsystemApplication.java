@@ -6,6 +6,11 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+/**
+ * When deploying the project to tomcat, the main class need to extends SpringBootServletInitializer
+ * SpringApplicationBuilder will be needed
+ * Otherwise, remove 'extends' and SpringApplicationBuilder
+ */
 @SpringBootApplication
 @EnableScheduling
 public class BgsystemApplication extends SpringBootServletInitializer{//extends SpringBootServletInitializer
