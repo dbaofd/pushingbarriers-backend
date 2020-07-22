@@ -39,11 +39,11 @@ public class GameServiceImpl implements GameService {
             sortedValue = "gameId";
         }
         if (period.equals(Period.THISWEEK.toString())) {//this weeks game info
-            startDate = MyTools.getLastWeekSunday();
-            endDate = MyTools.getThisWeekSunday();
+            startDate = MyTools.getThisWeekMonday();
+            endDate = MyTools.getNextWeekMonday();
         } else if (period.equals(Period.NEXTWEEK.toString())) {//next weeks game info
-            startDate = MyTools.getThisWeekSunday();
-            endDate = MyTools.getNextWeekSunday();
+            startDate = MyTools.getNextWeekMonday();
+            endDate = MyTools.getWeekAfterNextMonday();
         }
         Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.Direction.ASC, sortedValue);
         if (!team.equals("AllTeams") && period.equals(Period.WHOLESEASON.toString())) {

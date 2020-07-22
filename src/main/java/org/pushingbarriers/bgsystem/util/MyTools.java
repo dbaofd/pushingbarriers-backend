@@ -152,6 +152,13 @@ public class MyTools {
         return cal.getTime();
     }
 
+    public static Date getWeekAfterNextMonday(){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(getThisWeekMonday());
+        cal.add(Calendar.DATE, 14);
+        return cal.getTime();
+    }
+
     public static ResponseEntity<FileSystemResource> exportImg(String imgPath, String imgName) {
         if(imgName!=null) {
             File file = new File(imgPath, imgName);
