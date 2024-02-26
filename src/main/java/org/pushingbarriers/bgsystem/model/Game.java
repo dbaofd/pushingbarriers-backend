@@ -5,14 +5,18 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name="game")
-public class Game {
+public class Game implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer gameId;
+
+    @Column(nullable = false, name="gameTeamId")
+    private Integer gameTeamId;
 
     @Column(length = 150, nullable = false, name = "gameTeam")
     private String gameTeam;
@@ -39,8 +43,12 @@ public class Game {
         return gameId;
     }
 
-    public void setGameId(Integer gameId) {
-        this.gameId = gameId;
+    public Integer getGameTeamId() {
+        return gameTeamId;
+    }
+
+    public void setGameTeamId(Integer gameTeamId) {
+        this.gameTeamId = gameTeamId;
     }
 
     public String getGameTeam() {

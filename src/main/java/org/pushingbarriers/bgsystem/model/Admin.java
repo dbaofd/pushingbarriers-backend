@@ -1,10 +1,11 @@
 package org.pushingbarriers.bgsystem.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="admin")
-public class Admin {
+public class Admin implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer adminId;
@@ -17,10 +18,6 @@ public class Admin {
 
     public Integer getAdminId() {
         return adminId;
-    }
-
-    public void setAdminId(Integer adminId) {
-        this.adminId = adminId;
     }
 
     public String getAdminUsername() {

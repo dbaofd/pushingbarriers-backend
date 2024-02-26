@@ -31,17 +31,25 @@ public class AdminController {
             if (admin.getAdminPassword().equals(adminPassword)) {
                 try {
                     Jedis jedis = redisHelper.initializeJedis();
-                    String token = tokenGenerator.generate(adminName, adminPassword);
-                    jedis.set(adminName, token);
-                    //set key expire time
-                    jedis.expire(adminName, ConstantKit.TOKEN_EXPIRE_TIME);
-                    jedis.set(token, adminName);
-                    jedis.expire(token, ConstantKit.TOKEN_EXPIRE_TIME);
-                    Long currentTime = System.currentTimeMillis();
-                    jedis.set(token + adminName, currentTime.toString());
-                    //close jedis
-                    redisHelper.closeJedis(jedis);
-                    result.put("msg", token);
+                    if(jedis.exists(adminName)){
+                        result.put("msg", "already_logged_in");
+                    }else {
+                        String token = tokenGenerator.generate(adminName, adminPassword);
+                        jedis.set(adminName, token);
+                        //set key expire time
+                        jedis.expire(adminName, ConstantKit.TOKEN_EXPIRE_TIME);
+                        jedis.set(token, adminName);
+                        jedis.expire(token, ConstantKit.TOKEN_EXPIRE_TIME);
+                        Long currentTime = System.currentTimeMillis();
+                        jedis.set(token + adminName, currentTime.toString());
+                        jedis.expire(token + adminName, ConstantKit.TOKEN_EXPIRE_TIME);
+                        jedis.set(adminName + "type", "admin");
+                        jedis.expire(adminName + "type", ConstantKit.TOKEN_EXPIRE_TIME);
+                        //close jedis
+                        redisHelper.closeJedis(jedis);
+                        result.put("msg", "success");
+                        result.put("token",token);
+                    }
                 }catch (Exception e){
                     result.put("msg", "fail_to_connect_radis");
                 }
@@ -65,6 +73,7 @@ public class AdminController {
             redisHelper.closeJedis(jedis);
         }catch(Exception e){
             result.put("msg","fail_to_connect_redis");
+            return result;
         }
         if(admin!=null){
             if(!admin.equals(adminName)){

@@ -13,13 +13,15 @@ import java.util.List;
 @Repository
 public interface GameDao extends JpaRepository<Game,Integer> {
     @Query("select distinct gameTeam from Game")
-    public List<String> findAllTeams();
+    List<String> findAllTeams();
 
-    public Page<Game> findGamesByGameTeam(String gameTeam, Pageable pageable);
+    Page<Game> findGamesByGameTeam(String gameTeam, Pageable pageable);
 
-    public Page<Game> findGamesByGameDateBetween(Date startDate, Date endDate, Pageable pageable);
+    Page<Game> findGamesByGameDateBetween(Date startDate, Date endDate, Pageable pageable);
 
-    public Page<Game> findGamesByGameDateBetweenAndGameTeam(Date startDate, Date endDate, String gameTeam, Pageable pageable);
+    List<Game> findGamesByGameDateBetween(Date startDate, Date endDate);
+
+    Page<Game> findGamesByGameDateBetweenAndGameTeam(Date startDate, Date endDate, String gameTeam, Pageable pageable);
 
 
 

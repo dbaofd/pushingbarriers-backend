@@ -1,16 +1,18 @@
 package org.pushingbarriers.bgsystem.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name="training")
-public class Training {
+public class Training implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer trainingId;
 
-    @Column(nullable = false, name = "trainingTripId")
-    private Integer trainingTripId;
+    @Column(name = "trainingDate")
+    private Date trainingDate;
 
     @Column(length = 10,nullable = false, name = "trainingDay")
     private String trainingDay;
@@ -24,11 +26,17 @@ public class Training {
     @Column(length = 50, nullable = false, name = "trainingPlayer")
     private String trainingPlayer;
 
-    @Column(nullable = false, name = "trainingDriverId")
+    @Column(length = 15, nullable = false, name = "trainingPlayerGender")
+    private String trainingPlayerGender;
+
+    @Column(name = "trainingDriverId")
     private Integer trainingDriverId;
 
-    @Column(length = 50, nullable = false, name = "trainingDriver")
+    @Column(length = 50,  name = "trainingDriver")
     private String trainingDriver;
+
+    @Column(length = 15, name = "trainingDriverGender")
+    private String trainingDriverGender;
 
     @Column(length = 150, nullable = false, name = "trainingClub")
     private String trainingClub;
@@ -39,23 +47,61 @@ public class Training {
     @Column(length = 170, nullable = false, name = "trainingAddress")
     private String trainingAddress;
 
-    @Column(length = 10, nullable = false, name = "trainingConfirmation")
-    private String trainingConfirmation;
+    @Column(nullable = false, name = "trainingStatus")
+    private Integer trainingStatus=0;
+
+    @Column(length = 500, name = "trainingNote")
+    private String trainingNote;
+
+    @Column(nullable = false, name = "trainingType")
+    private Integer trainingType=1;
+
+    public Training(){}
+    public Training(Date trainingDate,String trainingDay,
+                    String trainingTime,Integer trainingPlayerId,String trainingPlayer,
+                    String trainingPlayerGender, String trainingClub,String trainingPlayerAddress,
+                    String trainingAddress, Integer trainingType){
+        this.trainingDate=trainingDate;
+        this.trainingDay=trainingDay;
+        this.trainingTime=trainingTime;
+        this.trainingPlayerId=trainingPlayerId;
+        this.trainingPlayer=trainingPlayer;
+        this.trainingPlayerGender=trainingPlayerGender;
+        this.trainingClub=trainingClub;
+        this.trainingPlayerAddress=trainingPlayerAddress;
+        this.trainingAddress=trainingAddress;
+        this.trainingType=trainingType;
+    }
+
+    public Training(Date trainingDate,String trainingDay,
+                    String trainingTime,Integer trainingPlayerId,String trainingPlayer,
+                    String trainingPlayerGender,Integer trainingDriverId,String trainingDriver,
+                    String trainingDriverGender,String trainingClub,String trainingPlayerAddress,
+                    String trainingAddress){
+        this.trainingDate=trainingDate;
+        this.trainingDay=trainingDay;
+        this.trainingTime=trainingTime;
+        this.trainingPlayerId=trainingPlayerId;
+        this.trainingPlayer=trainingPlayer;
+        this.trainingPlayerGender=trainingPlayerGender;
+        this.trainingDriverId=trainingDriverId;
+        this.trainingDriver=trainingDriver;
+        this.trainingDriverGender=trainingDriverGender;
+        this.trainingClub=trainingClub;
+        this.trainingPlayerAddress=trainingPlayerAddress;
+        this.trainingAddress=trainingAddress;
+    }
 
     public Integer getTrainingId() {
         return trainingId;
     }
 
-    public void setTrainingId(Integer trainingId) {
-        this.trainingId = trainingId;
+    public Date getTrainingDate() {
+        return trainingDate;
     }
 
-    public Integer getTrainingTripId() {
-        return trainingTripId;
-    }
-
-    public void setTrainingTripId(Integer trainingTripId) {
-        this.trainingTripId = trainingTripId;
+    public void setTrainingDate(Date trainingDate) {
+        this.trainingDate = trainingDate;
     }
 
     public String getTrainingDay() {
@@ -130,11 +176,43 @@ public class Training {
         this.trainingAddress = trainingAddress;
     }
 
-    public String getTrainingConfirmation() {
-        return trainingConfirmation;
+    public Integer getTrainingStatus() {
+        return trainingStatus;
     }
 
-    public void setTrainingConfirmation(String trainingConfirmation) {
-        this.trainingConfirmation = trainingConfirmation;
+    public void setTrainingStatus(Integer trainingConfirmation) {
+        this.trainingStatus = trainingConfirmation;
+    }
+
+    public String getTrainingNote() {
+        return trainingNote;
+    }
+
+    public void setTrainingNote(String trainingNote) {
+        this.trainingNote = trainingNote;
+    }
+
+    public String getTrainingPlayerGender() {
+        return trainingPlayerGender;
+    }
+
+    public void setTrainingPlayerGender(String trainingPlayerGender) {
+        this.trainingPlayerGender = trainingPlayerGender;
+    }
+
+    public String getTrainingDriverGender() {
+        return trainingDriverGender;
+    }
+
+    public void setTrainingDriverGender(String trainingDriverGender) {
+        this.trainingDriverGender = trainingDriverGender;
+    }
+
+    public Integer getTrainingType() {
+        return trainingType;
+    }
+
+    public void setTrainingType(Integer trainingType) {
+        this.trainingType = trainingType;
     }
 }

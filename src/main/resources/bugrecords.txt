@@ -1,0 +1,4 @@
+1. config springboot virtual picture path
+2. set up max-file-size in springboot 2.x: use spring.servlet.multipart.maxFileSize   spring.servlet.multipart.maxRequestSize
+3. Bug "org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role" happens
+when you don't set fetch to "FetchType.EAGER" in @ManyToMany
